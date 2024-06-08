@@ -1,6 +1,9 @@
 import express, { NextFunction, Request, Response } from "express"
 export const app = express();
 
+
+//import router
+import userRouter from "./routes/userRoutes";
 //Import libary
 import cors from "cors"
 import cookieParser from "cookie-parser";
@@ -22,16 +25,8 @@ app.use(
   })
 );
 
-
-
-//test api
-app.get("/test", (req, res, next) => {
-    res.status(200).json({
-      success: true,
-      messsage: "Hello",
-    });
-});
-
+//user api
+app.use("/api/v1", userRouter);
 
 //unknow route
 app.all("*", (req,res,next)=>{
