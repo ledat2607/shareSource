@@ -8,9 +8,8 @@ import path from "path";
 import sendMail from "../utils/sendMail";
 import { accessTokenOptions, refreshTokenOptions, sendToken } from "../utils/jwt";
 import { redis } from "../utils/redis";
-import { getUserById } from "../services/userService";
+import { getAllUserService, getUserById, updateUserRoleService } from "../services/userService";
 import cloudinary from "cloudinary";
-
 
 
 require("dotenv").config();
@@ -178,7 +177,9 @@ export const updateAccessToken = CatchAsyncError(async(req:Request, res:Response
     }
     const session = await redis.get(decoded.id);
     if(!session){
-      return next(new ErrorHandle(message, 404));
+      return next(
+        new ErrorHandle("Please login to access this resource !", 404)
+      );
     }
     const user = JSON.parse(session);
 
@@ -196,6 +197,8 @@ export const updateAccessToken = CatchAsyncError(async(req:Request, res:Response
     (req as any).user = user;
     res.cookie("access_token", accessToken, accessTokenOptions);
     res.cookie("refresh_token", refreshToken, refreshTokenOptions);
+
+    await redis.set(user._id, JSON.stringify(user), "EX", 604800);
 
     res.status(200).json({
       success: true,
@@ -225,7 +228,7 @@ interface ISocialAuth {
 //auth social
 export const socialAuth = CatchAsyncError(async(req:Request,res:Response,next:NextFunction)=>{
   try {
-    const { email, name, avatar } = req.body;
+    const { email, name, avatar,password } = req.body;
     const user = await userModel.findOne({ email });
     if(user){
       return next(new ErrorHandle("Socail email is verify another app !", 404));
@@ -234,6 +237,7 @@ export const socialAuth = CatchAsyncError(async(req:Request,res:Response,next:Ne
       const newUser = await userModel.create({
         email,
         name,
+        password,
         avatar: { public_id: avatar, url: avatar },
       });
       sendToken(newUser, 200, res);
@@ -367,3 +371,51 @@ export const updateAvatar = CatchAsyncError(
   }
 );
 
+
+//get all user -- only admin
+export const getAllUser = CatchAsyncError(async(req:Request, res:Response, next:NextFunction)=>{
+  try {
+    getAllUserService(res);
+  } catch (error:any) {
+    return next(new ErrorHandle(error.message, 404));
+  }
+})
+
+
+//update user role -- only admin
+export const updateuserRole = CatchAsyncError(async(req:Request, res:Response, next:NextFunction)=>{
+  try {
+    const { id, role } = req.body;
+
+    updateUserRoleService(res,id, role);
+    
+  } catch (error:any) {
+    return next(new ErrorHandle(error.message,404))
+  }
+})
+
+
+
+//delete user ---only admin
+export const deleteOneUser = CatchAsyncError(async(req:Request, res:Response, next:NextFunction)=>{
+  try {
+    const { id } = req.params;
+    const user = await userModel.findById(id)
+    if(!user){
+      return next(new ErrorHandle("User not exists",404))
+    }
+    await user.deleteOne({id})
+
+    await redis.del(id);
+    
+    const alluser = await userModel.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      message: "Delete user successfull !",
+      alluser,
+    });
+  } catch (error:any) {
+    return next(new ErrorHandle(error.message,404))
+  }
+})
