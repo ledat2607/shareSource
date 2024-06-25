@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavItems from "../utils/NavItems";
 import { ThemSwitcher } from "../utils/ThemSwitcher";
 import { HiOutlineMenuAlt3, HiOutlineUserCircle } from "react-icons/hi";
@@ -11,6 +11,9 @@ import Verifycation from "../components/Auth/Verifycation";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import avatar from "../../public/assets/avatar.jpg";
+import { useSession } from "next-auth/react";
+import { useSocialAuthMutation } from "@/redux/features/auth/authApi";
+import toast from "react-hot-toast";
 
 
 type Props = {
@@ -32,8 +35,27 @@ const Header: React.FC<Props> = ({
   const [active, setActive] = useState(false);
   const [openSidebar, setOpenSideBar] = useState(false);
   const { user } = useSelector((state: any) => state.auth);
+  const {data}= useSession()
+  const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
 
-
+  useEffect(() => {
+    if (!user) {
+      if (data) {
+        socialAuth({
+          name: data.user?.name,
+          email: data.user?.email,
+          avatar: data.user?.image,
+        });
+      }
+    }
+    if(isSuccess){
+      toast.success("Login successfull !!!");
+    }
+    if(error){
+      toast.error("Error:");
+    }
+  }, [data, user]);
+  
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
@@ -83,10 +105,10 @@ const Header: React.FC<Props> = ({
               {user ? (
                 <>
                   <Link href={"/profile"}>
-                    <Image
-                      src={user.avatar ? user.avatar : avatar}
+                    <img
+                      src={user.avatar ? user.avatar.public_id : avatar}
                       alt=""
-                      className="w-[30px] h-[30px] rounded-full cursor-pointer"
+                      className="w-[40px] h-[40px] ml-4 rounded-full cursor-pointer"
                     />
                   </Link>
                 </>
@@ -120,11 +142,23 @@ const Header: React.FC<Props> = ({
                 </p>
               </h1>
               <NavItems activeItem={activeItem} isMobile={true} />
-              <HiOutlineUserCircle
-                size={40}
-                className="cursor-pointer"
-                onClick={() => setOpen(true)}
-              />
+              {user ? (
+                <>
+                  <Link href={"/profile"}>
+                    <img
+                      src={user.avatar ? user.avatar.public_id : avatar}
+                      alt=""
+                      className="w-[80px] h-[80px] 800px:ml-4 rounded-full cursor-pointer"
+                    />
+                  </Link>
+                </>
+              ) : (
+                <HiOutlineUserCircle
+                  size={25}
+                  className="hidden 800px:block cursor-pointer dark:text-white text-black ml-3"
+                  onClick={() => setOpen(true)}
+                />
+              )}
               <br />
               <br />
               <br />

@@ -62,7 +62,7 @@ const Hero: FC<Props> = (props) => {
         >
           <input
             type="search"
-            className="w-full focus:ring-2 border-black focus:py-5 focus:ring-blue-500 focus:border-0 dark:border-white h-[40px] rounded-2xl px-3 py-5 dark:text-white text-black focus:outline-none border-2 border-transparent transition-colors duration-300"
+            className="w-full focus:ring-2 bg-gray-300 border-black focus:py-5 focus:ring-blue-500 focus:border-0 dark:border-white h-[40px] rounded-2xl px-3 py-5 dark:text-white text-black focus:outline-none border-2 border-transparent transition-colors duration-300"
             placeholder="Search here..."
           />
           <div className="w-[150px] h-[40px] cursor-pointer dark:text-black text-white duration-300 hover:translate-x-3 dark:bg-white bg-gray-500 ml-6 rounded-2xl flex items-center justify-center">
@@ -70,6 +70,7 @@ const Hero: FC<Props> = (props) => {
             <BsArrowRight className="ml-2" />
           </div>
         </motion.div>
+        <br />
         <motion.div
           variants={fadeIn("left", 0.7)}
           initial="hidden"

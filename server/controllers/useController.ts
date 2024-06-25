@@ -229,16 +229,12 @@ interface ISocialAuth {
 //auth social
 export const socialAuth = CatchAsyncError(async(req:Request,res:Response,next:NextFunction)=>{
   try {
-    const { email, name, avatar,password } = req.body;
+    const { email, name, avatar } = req.body;
     const user = await userModel.findOne({ email });
-    if(user){
-      return next(new ErrorHandle("Socail email is verify another app !", 404));
-    }
     if(!user){
       const newUser = await userModel.create({
         email,
         name,
-        password,
         avatar: { public_id: avatar, url: avatar },
       });
       sendToken(newUser, 200, res);

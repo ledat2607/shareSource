@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
-  AiFillFacebook,
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineGithub,
@@ -11,8 +10,7 @@ import {
 import { styles } from '@/app/style/styles';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import toast from 'react-hot-toast';
-
-
+import { signIn } from 'next-auth/react';
 
 
 type Props = {
@@ -111,14 +109,13 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
         </div>
         <div className="flex items-center justify-center my-3 p-2">
           <AiOutlineGoogle
+            onClick={() => signIn("google")}
             size={35}
             className="cursor-pointer mr-2 text-black dark:text-white hover:text-green-500 transition-all duration-300 hover:scale-125"
           />
-          <AiFillFacebook
-            size={35}
-            className="cursor-pointer ml-4 mr-2 text-black dark:text-white hover:text-blue-500 transition-all duration-300 hover:scale-125"
-          />
+
           <AiOutlineGithub
+            onClick={() => signIn("github")}
             size={35}
             className="cursor-pointer ml-4 mr-2 text-black dark:text-white hover:text-red-500 transition-all duration-300 hover:scale-125"
           />
