@@ -112,6 +112,10 @@ export const activationUser= CatchAsyncError(async(req:Request,res:Response,next
         name,
         email,
         password,
+        avatar: {
+          public_id: "https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg",
+          url: "https://i.pinimg.com/736x/3f/94/70/3f9470b34a8e3f526dbdb022f9f19cf7.jpg",
+        },
       });
       res.status(200).json({
         success: true,
@@ -157,7 +161,6 @@ export const LogoutUser = CatchAsyncError(async(req:Request,res:Response,next:Ne
     redis.del(userId);
     res.status(200).json({
       success: true,
-      message: "Logout successfull !",
     });
   } catch (error:any) {
     return next(new ErrorHandle(error.message, 404));
@@ -249,24 +252,23 @@ export const socialAuth = CatchAsyncError(async(req:Request,res:Response,next:Ne
 
 
 ///update user info
-interface IUpdateUserInfo{
-  name:string,
-  email:string,
+interface IUpdateUserInfo {
+  name: string;
+  email: string;
+  birthDay?: Date;
 }
 export const updateUserInfo= CatchAsyncError(async(req:Request,res:Response,next:NextFunction)=>{
   try {
-    const { name, email } = req.body as IUpdateUserInfo;
+    const { name, birthDay } = req.body as IUpdateUserInfo;
+    console.log(birthDay);
     const userId = (req as any).user?._id;
     const user = await userModel.findById(userId);
-    if (email && user) {
-      const isEmailExists = await userModel.findOne({ email });
-      if (isEmailExists) {
-        return next(new ErrorHandle("Email already exists !", 404));
-      }
-      user.email = email;
-    }
+
     if (name && user) {
       user.name = name;
+    }
+    if (birthDay && user) {
+      user.birthDay = birthDay;
     }
     await user?.save();
 
@@ -330,39 +332,31 @@ export const updateAvatar = CatchAsyncError(
       const { avatar } = req.body;
       const userId = (req as any).user?._id;
       const user = await userModel.findById(userId);
-      // Check if avatar exists in request body and user is defined
       if (avatar && user) {
-        // If user has an existing avatar, delete it from Cloudinary
         if (user?.avatar?.public_id) {
           await cloudinary.v2.uploader.destroy(user?.avatar?.public_id);
         }
 
-        // Upload new avatar image to Cloudinary
-        const myUpload = await cloudinary.v2.uploader.upload(avatar, {
+        const myUpload = await cloudinary.v2.uploader.upload(avatar.avatar, {
           folder: "avatars",
           width: 150,
         });
 
-        // Update user's avatar information
         user.avatar = {
           public_id: myUpload.public_id,
           url: myUpload.secure_url,
         };
 
-        // Save user's changes
         await user?.save();
       } else {
-        // If either avatar or user is missing, return an error
         throw new Error("Missing required parameter - avatar or user");
       }
       await redis.set(userId, JSON.stringify(user));
-      // Send success response
       res.status(200).json({
         success: true,
         message: "Update user avatar successful!",
       });
     } catch (error: any) {
-      // If an error occurs, pass it to the error handling middleware
       return next(new ErrorHandle(error.message, 404));
     }
   }

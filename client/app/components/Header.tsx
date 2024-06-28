@@ -9,10 +9,9 @@ import Login from "../components/Auth/Login";
 import SignUp from "../components/Auth/SignUp";
 import Verifycation from "../components/Auth/Verifycation";
 import { useSelector } from "react-redux";
-import Image from "next/image";
-import avatar from "../../public/assets/avatar.jpg";
+import avatarHeader from "../../public/assets/avatar.jpg";
 import { useSession } from "next-auth/react";
-import { useSocialAuthMutation } from "@/redux/features/auth/authApi";
+import { useLogoutUserQuery, useSocialAuthMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 
 
@@ -37,6 +36,11 @@ const Header: React.FC<Props> = ({
   const { user } = useSelector((state: any) => state.auth);
   const {data}= useSession()
   const [socialAuth, { isSuccess, error }] = useSocialAuthMutation();
+  const [logout, setLogout] = useState(false);
+
+  const {} = useLogoutUserQuery(undefined, { skip: !logout ? true : false });
+
+
 
   useEffect(() => {
     if (!user) {
@@ -48,11 +52,14 @@ const Header: React.FC<Props> = ({
         });
       }
     }
-    if(isSuccess){
+    if (isSuccess) {
       toast.success("Login successfull !!!");
     }
-    if(error){
-      toast.error("Error:");
+    if (data === null && !user) {
+      setLogout(true);
+    }
+    if(user){
+      setLogout(false);
     }
   }, [data, user]);
   
@@ -66,7 +73,6 @@ const Header: React.FC<Props> = ({
       }
     });
   }
-
 
   const handleClose = (e: any) => {
     if (e.target.id === "screen") {
@@ -106,9 +112,12 @@ const Header: React.FC<Props> = ({
                 <>
                   <Link href={"/profile"}>
                     <img
-                      src={user.avatar ? user.avatar.public_id : avatar}
+                      src={user.avatar ? user.avatar.url : avatarHeader}
                       alt=""
                       className="w-[40px] h-[40px] ml-4 rounded-full cursor-pointer"
+                      style={{
+                        border: activeItem === 5 ? "2px solid #ffc107" : "",
+                      }}
                     />
                   </Link>
                 </>
@@ -146,7 +155,7 @@ const Header: React.FC<Props> = ({
                 <>
                   <Link href={"/profile"}>
                     <img
-                      src={user.avatar ? user.avatar.public_id : avatar}
+                      src={user?.avatar ? user.avatar.public_id : avatarHeader}
                       alt=""
                       className="w-[80px] h-[80px] 800px:ml-4 rounded-full cursor-pointer"
                     />

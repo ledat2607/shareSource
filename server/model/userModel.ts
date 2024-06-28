@@ -16,8 +16,7 @@ export interface IUser extends Document {
   };
   role: string;
   isVerified: boolean;
-  userType: string;
-  discountCode: Array<{ discountId: string }>;
+  birthDay: Date;
   courses: Array<{ courseId: string }>;
   comparePassword: (password: string) => Promise<boolean>;
   SignAccessToken: () => string;
@@ -63,11 +62,8 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
         courseId: String,
       },
     ],
-    userType: {
-      type: String,
-      default: "Bronze",
-    },
-    discountCode: [{ discountId: String }],
+
+    birthDay: { type: Date, default: Date.now() },
   },
   { timestamps: true }
 );

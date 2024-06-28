@@ -1,0 +1,24 @@
+import { apiSlide } from "../api/appSlice";
+
+export const userApi = apiSlide.injectEndpoints({
+  endpoints: (builder) => ({
+    updateAvatar: builder.mutation({
+      query: (avatar) => ({
+        url: "update-user-avatar",
+        method: "PUT",
+        body: { avatar },
+        credentials: "include" as const,
+      }),
+    }),
+    editProfile: builder.mutation({
+      query: ({ name, birthDay }) => ({
+        url: "update-user-info",
+        method: "PUT",
+        body: { name, birthDay },
+        credentials: "include" as const,
+      }),
+    }),
+  }),
+});
+
+export const { useUpdateAvatarMutation, useEditProfileMutation } = userApi;
