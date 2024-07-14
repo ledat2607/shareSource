@@ -1,9 +1,10 @@
 import { styles } from '@/app/style/styles';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import {motion} from "framer-motion"
 import { fadeIn } from '../variant';
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
+import { useUpdateAvatarMutation, useUpdatePasswordMutation } from '@/redux/features/user/userApi';
 type Props = {
   user: any;
 };
@@ -15,10 +16,34 @@ const ChangePassword: React.FC<Props> = ({ user }) => {
   const [confirmOld, setConfirmOld] = useState(false);
   const [confirmNew, setConfirmNew] = useState(false);
   const [confirmVis, setConfirmVis] = useState(false);
-  const handleChangePassword = () => {
-    toast.success("Update password successfull !");
+  const [updatePassword, { isSuccess, error }] = useUpdatePasswordMutation();
+
+
+
+  const handleChangePassword = async (e: any) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      toast.error('Please confirm right new password!');
+    } else {
+      await updatePassword({ oldPassword, newPassword });
+    }
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Password updated successfully!");
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    }
+    if (error) {
+      if ("data" in error) {
+        const errorData = error as any;
+        toast.error(errorData.data.message);
+      }
+    }
+  }, [isSuccess, error]);
+  
   return (
     <motion.div
       variants={fadeIn("left", 0.4)}
@@ -33,8 +58,8 @@ const ChangePassword: React.FC<Props> = ({ user }) => {
       <div className="w-full">
         <form
           aria-required
-          onSubmit={handleChangePassword}
           className="flex flex-col items-center"
+          onSubmit={handleChangePassword}
         >
           <div className="w-[95%] relative 800px:w-[80%] mt-5">
             <label className="block pb-2 dark:text-white text-black font-Josefin text-[15px] 800px:text-[18px]">

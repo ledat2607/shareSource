@@ -204,9 +204,7 @@ export const updateAccessToken = CatchAsyncError(async(req:Request, res:Response
 
     await redis.set(user._id, JSON.stringify(user), "EX", 604800);
 
-    res.status(200).json({
-      success: true,
-    });
+   next();
   } catch (error: any) {
     return next(new ErrorHandle(error.message, 404));
   }
@@ -260,7 +258,6 @@ interface IUpdateUserInfo {
 export const updateUserInfo= CatchAsyncError(async(req:Request,res:Response,next:NextFunction)=>{
   try {
     const { name, birthDay } = req.body as IUpdateUserInfo;
-    console.log(birthDay);
     const userId = (req as any).user?._id;
     const user = await userModel.findById(userId);
 
@@ -284,14 +281,14 @@ export const updateUserInfo= CatchAsyncError(async(req:Request,res:Response,next
 
 //update password
 interface IUpdatePassword {
-  oldPass: string;
-  newPass: string;
+  oldPassword: string;
+  newPassword: string;
 }
 
 export const updatePassword = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { oldPass, newPass } = req.body as IUpdatePassword;
+      const { oldPassword, newPassword } = req.body as IUpdatePassword;
       const user = await userModel
         .findById((req as any).user?._id)
         .select("+password");
@@ -299,12 +296,12 @@ export const updatePassword = CatchAsyncError(
         return next(new ErrorHandle("Invalid user", 404));
       }
 
-      const isCompare = await user?.comparePassword(oldPass);
+      const isCompare = await user?.comparePassword(oldPassword);
 
       if (!isCompare) {
         return next(new ErrorHandle("Old password doesn't match !", 401));
       }
-      user.password = newPass;
+      user.password = newPassword;
 
       await redis.set((req as any).user?._id, JSON.stringify(user));
       
@@ -312,7 +309,6 @@ export const updatePassword = CatchAsyncError(
 
       res.status(200).json({
         success: true,
-        message: "Update successfull !",
       });
     } catch (error: any) {
       return next(new ErrorHandle(error.message, 404));

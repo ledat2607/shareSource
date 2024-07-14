@@ -44,6 +44,8 @@ const Profile: React.FC<Props> = ({ user }) => {
       exit="hidden"
       className="w-[85%] flex m-auto"
     >
+            <div className="absolute -left-[100px] -top-[300px] blur-2xl 1500px:h-[700px] 1500px:w-[700px] 1100px:h-[600px] 1100px:w-[600px] h-[24vh] w-[50vw] hero-animation rounded-full"></div>
+
       <div
         className={`w-[60px] 800px:w-[20%] h-[450px] dark:bg-slate-900 bg-gray-100 bg-opacity-90 border-[#000000ac] rounded-xl shadow-2xl mt-[80px] mb-[10px] sticky ${
           scroll ? "top-[120px]" : "top-[30px]"

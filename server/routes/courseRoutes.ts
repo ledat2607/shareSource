@@ -1,11 +1,13 @@
 import express from "express";
-import { addAnswer, addQuestion, addReviewData, addReviewReply, deleteCourse, getAllCourse, getAllCourseAdmin, getCourseByUser, getSignleCourse, updateCourse, uploadCourse } from "../controllers/courseController";
+import { addAnswer, addQuestion, addReviewData, addReviewReply, deleteCourse, generateVideoUrl, getAllCourse, getAllCourseAdmin, getCourseByUser, getSignleCourse, updateCourse, uploadCourse } from "../controllers/courseController";
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
+import { updateAccessToken } from "../controllers/useController";
 const courseRoute = express.Router();
 
 
 courseRoute.post(
   "/upload-course",
+  updateAccessToken,
   isAuthenticated,
   authorizeRoles("admin"),
   uploadCourse
@@ -43,7 +45,7 @@ courseRoute.get(
   getAllCourseAdmin
 );
 
-
+courseRoute.post("/getVdocipherOTP", generateVideoUrl);
 
 
 export default courseRoute;

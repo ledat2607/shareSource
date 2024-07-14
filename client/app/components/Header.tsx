@@ -122,11 +122,13 @@ const Header: React.FC<Props> = ({
                   </Link>
                 </>
               ) : (
-                <HiOutlineUserCircle
-                  size={25}
-                  className="hidden 800px:block cursor-pointer dark:text-white text-black ml-3"
-                  onClick={() => setOpen(true)}
-                />
+                <>
+                  <HiOutlineUserCircle
+                    size={20}
+                    className="hidden 800px:block cursor-pointer ml-3"
+                    onClick={() => setOpen(true)}
+                  />
+                </>
               )}
             </div>
           </div>
@@ -155,18 +157,20 @@ const Header: React.FC<Props> = ({
                 <>
                   <Link href={"/profile"}>
                     <img
-                      src={user?.avatar ? user.avatar.public_id : avatarHeader}
+                      src={user?.avatar ? user.avatar.url : avatarHeader}
                       alt=""
                       className="w-[80px] h-[80px] 800px:ml-4 rounded-full cursor-pointer"
                     />
                   </Link>
                 </>
               ) : (
-                <HiOutlineUserCircle
-                  size={25}
-                  className="hidden 800px:block cursor-pointer dark:text-white text-black ml-3"
-                  onClick={() => setOpen(true)}
-                />
+                <>
+                  <HiOutlineUserCircle
+                    size={25}
+                    className="text-[18px] text-black dark:text-white"
+                    onClick={() => setOpen(true)}
+                  />
+                </>
               )}
               <br />
               <br />

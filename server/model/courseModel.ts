@@ -20,13 +20,13 @@ interface ILink extends Document {
 
 interface ICourseData extends Document {
   title: string;
-  descriptions: string;
+  description: string;
   videoUrl: string;
   videoThumbnail: object;
   videoSection: string;
   videoLength: number;
   videoPlayer: string;
-  link: ILink[];
+  links: ILink[];
   suggestion: string;
   question: IComment[];
 }
@@ -34,7 +34,7 @@ interface ICourseData extends Document {
 interface ICourse extends Document {
   _id: Types.ObjectId; // Define the type of _id
   name: string;
-  descriptions: string;
+  description: string;
   price: number;
   estimatePrice?: number;
   thumbnail: object;
@@ -48,6 +48,7 @@ interface ICourse extends Document {
   rating?: number;
   purchased?: number;
   createdAt: Date;
+  totalVideos: number;
 }
 
 const reviewSchema = new Schema<IReview>({
@@ -71,11 +72,11 @@ const commentSchema = new Schema<IComment>({
 const courseDataSchema = new Schema<ICourseData>({
   videoUrl: String,
   title: String,
-  descriptions: String,
+  description: String,
   videoSection: String,
   videoLength: Number,
   videoPlayer: String,
-  link: [linkSchema],
+  links: [linkSchema],
   suggestion: String,
   question: [commentSchema],
 });
@@ -85,9 +86,8 @@ const courseSchema = new Schema<ICourse>({
     type: String,
     required: true,
   },
-  descriptions: {
+  description: {
     type: String,
-    required: true,
   },
   price: {
     type: Number,
@@ -114,12 +114,12 @@ const courseSchema = new Schema<ICourse>({
   },
   demoUrl: {
     type: String,
-    required: true,
   },
   benefit: [{ title: String }],
   prerequisites: [{ title: String }],
   reviews: [reviewSchema],
   courseData: [courseDataSchema],
+  totalVideos: { type: Number },
   rating: {
     type: Number,
     default: 0,

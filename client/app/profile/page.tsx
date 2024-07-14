@@ -17,7 +17,6 @@ const page: FC<Props> = (props) => {
   const { user } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    // Giả sử thời gian tải dữ liệu là 2 giây
     setTimeout(() => {
       setLoading(false);
     }, 2000);
