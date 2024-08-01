@@ -45,12 +45,12 @@ const ProfileInfo: React.FC<Props> = ({ avatar, user }) => {
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     if (name !== "") {
-      editProfile({
+      await editProfile({
         name: name,
       });
     }
     if (birthDay !== "") {
-      editProfile({
+      await editProfile({
         birthDay: birthDay,
       });
     }

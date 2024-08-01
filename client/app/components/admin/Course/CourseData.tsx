@@ -4,8 +4,8 @@ import toast from 'react-hot-toast';
 import { IoAdd } from "react-icons/io5";
 
 type Props = {
-  benefits: { title: string }[];
-  setBenifits: (benefits: { title: string }[]) => void;
+  benefit: { title: string }[];
+  setBenefit: (benefits: { title: string }[]) => void;
   prerequisites: { title: string }[];
   setPrerequisites: (prerequisites: { title: string }[]) => void;
   active: number;
@@ -13,44 +13,42 @@ type Props = {
 };
 
 const CourseData: React.FC<Props> = ({
-  benefits,
-  setBenifits,
+  benefit,
+  setBenefit,
   prerequisites,
   setPrerequisites,
   active,
   setActive,
 }) => {
-    const handleChangeBenifits = (index:number, value:any)=>{
-        const updateBenifit = [...benefits];
-        updateBenifit[index].title = value;
-        setBenifits(updateBenifit);
+  const handleChangeBenifits = (index: number, value: any) => {
+    const updateBenifit = [...benefit];
+    updateBenifit[index].title = value;
+    setBenefit(updateBenifit);
+  };
+  const handleAddBenifit = () => {
+    setBenefit([...benefit, { title: "" }]);
+  };
+  const handleChangePrerequisites = (index: number, value: any) => {
+    const updatePrerequisites = [...prerequisites];
+    updatePrerequisites[index].title = value;
+    setPrerequisites(updatePrerequisites);
+  };
+  const handleAddPrerequisites = () => {
+    setPrerequisites([...prerequisites, { title: "" }]);
+  };
+  const prevButton = () => {
+    setActive(active - 1);
+  };
+  const handleNextOption = () => {
+    if (
+      benefit[benefit.length - 1]?.title !== "" &&
+      prerequisites[prerequisites.length - 1]?.title !== ""
+    ) {
+      setActive(active + 1);
+    } else {
+      toast.error("Please fill enough information to countinue !");
     }
-    const handleAddBenifit = () => {
-      setBenifits([...benefits, { title: "" }]);
-    };
-    const handleChangePrerequisites = (index:number, value:any)=>{
-        const updatePrerequisites = [...prerequisites];
-        updatePrerequisites[index].title = value;
-        setPrerequisites(updatePrerequisites);
-    }
-    const handleAddPrerequisites = () => {
-      setPrerequisites([...prerequisites, { title: "" }]);
-    };
-    const prevButton = ()=>{
-        setActive(active - 1);
-    }
-    const handleNextOption = ()=>{
-        if (
-          benefits[benefits.length - 1]?.title !== "" &&
-          prerequisites[prerequisites.length - 1]?.title !== ""
-        ){
-
-            setActive(active + 1);
-        }
-        else{
-            toast.error("Please fill enough information to countinue !");
-        }
-    }
+  };
   return (
     <div className="w-[90%] 800px:w-[80%] mx-auto 800px:mt-24 mt-16">
       <div className="w-full">
@@ -58,7 +56,7 @@ const CourseData: React.FC<Props> = ({
           What are the benifits for student in this course?
         </label>
 
-        {benefits.map((benifit: any, index: number) => (
+        {benefit?.map((benifit: any, index: number) => (
           <input
             type="text"
             key={index}
@@ -83,7 +81,7 @@ const CourseData: React.FC<Props> = ({
           What are the prerequisites for starting this course?
         </label>
 
-        {prerequisites.map((prerequisites: any, index: number) => (
+        {prerequisites?.map((prerequisites: any, index: number) => (
           <input
             type="text"
             key={index}

@@ -44,9 +44,7 @@ import { Document, Model, Schema, model } from "mongoose";
    category: [categorySchema],
    banner: {
      image: BannerSchema,
-     title: {
-       type: String,
-     },
+     title: { type: String },
      subTitle: { type: String },
    },
  });

@@ -124,8 +124,8 @@ const Header: React.FC<Props> = ({
               ) : (
                 <>
                   <HiOutlineUserCircle
-                    size={20}
-                    className="hidden 800px:block cursor-pointer ml-3"
+                    size={30}
+                    className="hidden 800px:block cursor-pointer dark:text-white text-black"
                     onClick={() => setOpen(true)}
                   />
                 </>

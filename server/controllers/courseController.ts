@@ -36,13 +36,16 @@ export const uploadCourse = CatchAsyncError(async(req:Request,res:Response,next:
 
 
 //update course
-export const updateCourse = CatchAsyncError(async(req:Request,res:Response, next:NextFunction)=>{
-    try {
-      const data = req.body;
-      const thumbnail = data.thumbnail;
+export const updateCourse = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const data = req.body;
+    const { thumbnail } = data;
 
-      if (thumbnail) {
-        await cloudinary.v2.uploader.destroy(thumbnail.public_id);
+    console.log("Received Data:", data);
+
+    if (thumbnail) {
+      // Check if thumbnail is an object with public_id or a URL string
+      if (typeof thumbnail === "string") {
         const myCloud = await cloudinary.v2.uploader.upload(thumbnail, {
           folder: "courses",
         });
@@ -50,52 +53,71 @@ export const updateCourse = CatchAsyncError(async(req:Request,res:Response, next
           public_id: myCloud.public_id,
           url: myCloud.secure_url,
         };
+      } else if (thumbnail.public_id) {
+        await cloudinary.v2.uploader.destroy(thumbnail.public_id);
+        const myCloud = await cloudinary.v2.uploader.upload(thumbnail.url, {
+          folder: "courses",
+        });
+        data.thumbnail = {
+          public_id: myCloud.public_id,
+          url: myCloud.secure_url,
+        };
       }
-      const courseId = req.params.id;
-      const course = await CourseModel.findByIdAndUpdate(
-        courseId,
-        {
-          $set: data,
-        },
-        { new: true }
-      );
-
-      res.status(200).json({
-        success: true,
-        message: "Update successfull !",
-      });
-    } catch (error:any) {
-        return next(new ErrorHandle(error.message, 404));
     }
-})
+
+    const courseId = req.params.id;
+
+    const course = await CourseModel.findByIdAndUpdate(
+      courseId,
+      {
+        $set: data.data,
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!course) {
+      return next(new ErrorHandle('Course not found', 404));
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Update successful!",
+      course,
+    });
+  } catch (error: any) {
+    console.error("Error during update:", error);
+    return next(new ErrorHandle(error.message, 500));
+  }
+});
 
 //delete course
 export const deleteCourse = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
   try {
-      const courseId = req.params.id;
-      
-      const course = await CourseModel.findByIdAndDelete(courseId);
-      if (!course) {
-          return next(new ErrorHandle("Course not found", 404));
+    const courseId = req.params.id;
+
+    const course = await CourseModel.findByIdAndDelete(courseId);
+
+    if (!course) {
+      return next(new ErrorHandle("Course not found", 404));
+    }
+
+    const isExists = await redis.get("allCourses");
+    if (isExists) {
+      const courses = JSON.parse(isExists);
+
+      const updatedCourses = courses.filter((c: any) => c._id !== courseId);
+
+      if (updatedCourses.length === 0) {
+        await redis.del("allCourses");
+      } else {
+        await redis.set("allCourses", JSON.stringify(updatedCourses));
       }
+    }
 
-      const isExists = await redis.get("allCourses");
-      if (isExists) {
-          const courses = JSON.parse(isExists);
-
-          const updatedCourses = courses.filter((c: any) => c._id !== courseId);
-
-          if (updatedCourses.length === 0) {
-              await redis.del("allCourses");
-          } else {
-              await redis.set("allCourses", JSON.stringify(updatedCourses));
-          }
-      }
-
-      res.status(200).json({
-        success: true,
-        message: "Delete successful!",
-      });
+    res.status(200).json({
+      success: true,
+      message: "Delete successful!",
+    });
   } catch (error: any) {
       return next(new ErrorHandle(error.message, 404));
   }

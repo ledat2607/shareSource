@@ -4,7 +4,7 @@ import AdminSidebar from '@/app/components/admin/AdminSidebar';
 import Heading from '@/app/utils/Heading';
 import AdminProtected from '@/app/hooks/adminProtected';
 import DashboardHeader from '@/app/components/admin/DashboardHeader';
-import AllCourses from "../../components/admin/AllCourses/AllCourses";
+import AllUser from "../../components/admin/AllUser/AllUser";
 type Props = {}
 
 const page: React.FC<Props> = () => {
@@ -22,7 +22,7 @@ const page: React.FC<Props> = () => {
           </div>
           <div className="w-[85%] min-h-screen p-1">
             <DashboardHeader />
-            <AllCourses />
+            <AllUser isTeam={false} />
           </div>
         </div>
       </AdminProtected>

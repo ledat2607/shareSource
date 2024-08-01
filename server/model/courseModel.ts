@@ -35,6 +35,7 @@ interface ICourse extends Document {
   _id: Types.ObjectId; // Define the type of _id
   name: string;
   description: string;
+  categories: string;
   price: number;
   estimatePrice?: number;
   thumbnail: object;
@@ -88,6 +89,10 @@ const courseSchema = new Schema<ICourse>({
   },
   description: {
     type: String,
+  },
+  categories: {
+    type: String,
+    required: true,
   },
   price: {
     type: Number,

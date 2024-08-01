@@ -27,7 +27,12 @@ courseRoute.delete(
 );
 courseRoute.get("/get-course/:id", getSignleCourse);
 courseRoute.get("/get-all-course", getAllCourse);
-courseRoute.get("/get-all-course", getAllCourse);
+courseRoute.get(
+  "/get-course-content/:id",
+  updateAccessToken,
+  isAuthenticated,
+  getCourseByUser
+);
 courseRoute.put(
   "/add-question",
   isAuthenticated,

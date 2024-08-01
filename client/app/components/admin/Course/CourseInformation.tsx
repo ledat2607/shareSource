@@ -1,5 +1,6 @@
 import { styles } from '@/app/style/styles';
-import React, { useState } from 'react'
+import { useGetHeroDataQuery } from '@/redux/features/layout/layoutApi';
+import React, { useEffect, useState } from 'react'
 
 type Props = {
   courseInfo: any;
@@ -15,7 +16,15 @@ const CourseInformation: React.FC<Props> = ({
   setCourseInfo,
 }) => {
   const [dragging, setDragging] = useState(false);
-
+  const { data } = useGetHeroDataQuery("Category", {
+    refetchOnMountOrArgChange: true,
+  });
+  const [categories,setCategories] = useState<any[]>([])
+  useEffect(() => {
+    if (data) {
+      setCategories(data.layoutData.category);
+    }
+  }, [data]);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setActive(active + 1);
@@ -135,26 +144,53 @@ const CourseInformation: React.FC<Props> = ({
             />
           </div>
         </div>
-        <div className="mt-3">
-          <label
-            htmlFor=""
-            className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
-          >
-            Course Tags
-          </label>
-          <input
-            type="tags"
-            name=""
-            required
-            value={courseInfo.tags}
-            onChange={(e: any) =>
-              setCourseInfo({ ...courseInfo, tags: e.target.value })
-            }
-            id="name"
-            placeholder="Course tags...."
-            className={`mt-2 w-full px-3 py-3 rounded-2xl bg-gray-200/80 dark:bg-gray-800 text-black dark:text-white `}
-          />
+        <div className="w-full mt-3 flex justify-between">
+          <div className="800px:w-[45%] w-[40%]">
+            <label
+              htmlFor=""
+              className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
+            >
+              Course Tags
+            </label>
+            <input
+              type="text"
+              name="tags"
+              required
+              value={courseInfo.tags}
+              onChange={(e: any) =>
+                setCourseInfo({ ...courseInfo, tags: e.target.value })
+              }
+              id="tags"
+              placeholder="Course tags...."
+              className={`mt-2 w-full px-3 py-3 rounded-2xl bg-gray-200/80 dark:bg-gray-800 text-black dark:text-white `}
+            />
+          </div>
+          <div className="800px:w-[45%] w-[55%]">
+            <label
+              htmlFor=""
+              className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
+            >
+              Course Categories
+            </label>
+            <select
+              value={courseInfo.categories}
+              onChange={(e: any) =>
+                setCourseInfo({ ...courseInfo, categories: e.target.value })
+              }
+              name=""
+              id=""
+              className="w-full rounded-2xl px-3 py-3 mt-2 dark:bg-slate-800 dark:text-white text-black bg-gray-300"
+            >
+              <option value="">Choose category</option>
+              {categories.map((i: any, index: number) => (
+                <option value={i._id} key={index}>
+                  {i.title}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
+
         <div className="w-full mt-3 flex justify-between">
           <div className="800px:w-[45%] w-[40%]">
             <label
@@ -215,9 +251,13 @@ const CourseInformation: React.FC<Props> = ({
             onDrop={handleDrop}
           >
             {courseInfo?.thumbnail ? (
-              <img src={courseInfo.thumbnail} alt="" className='h-[10vh] object-contain'/>
+              <img
+                src={courseInfo.thumbnail.url}
+                alt=""
+                className="h-[10vh] object-contain"
+              />
             ) : (
-              <span className='text-black dark:text-white'>
+              <span className="text-black dark:text-white">
                 Drag and drop your thumbnail here or click to browse
               </span>
             )}

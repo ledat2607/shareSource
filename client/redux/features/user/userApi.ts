@@ -26,6 +26,28 @@ export const userApi = apiSlide.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+    getAllUser: builder.query({
+      query: () => ({
+        url: "get-all-user",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+    updateRole: builder.mutation({
+      query: ({ id, role }) => ({
+        url: "update-role",
+        method: "PUT",
+        body: { id, role },
+        credentials: "include" as const,
+      }),
+    }),
+    deleteUser: builder.mutation({
+      query: ({ id }) => ({
+        url: `delete-user/${id}`,
+        method: "DELETE",
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -33,4 +55,7 @@ export const {
   useUpdateAvatarMutation,
   useEditProfileMutation,
   useUpdatePasswordMutation,
+  useGetAllUserQuery,
+  useUpdateRoleMutation,
+  useDeleteUserMutation,
 } = userApi;

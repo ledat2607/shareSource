@@ -13,6 +13,7 @@ type Props = {
   setActive: (active: number) => void;
   handleCreateCourse: any;
   courseContent: any;
+  type: string;
 };
 
 const CourseReview: React.FC<Props> = ({
@@ -20,18 +21,21 @@ const CourseReview: React.FC<Props> = ({
   setActive,
   handleCreateCourse,
   courseContent,
+  type,
 }) => {
   const PrevButton = () => {
     setActive(active - 1);
   };
-  const discountPercent =
-    ((courseContent?.estimatedPrice - courseContent.price) /
-      courseContent?.estimatedPrice) *
-    100;
+  const estimatedPrice = typeof courseContent.estimatePrice === 'string'
+  ? parseFloat(courseContent.estimatePrice)
+  : courseContent.estimatePrice;
+
+const discountPercent =
+  ((estimatedPrice - courseContent.price) / estimatedPrice) * 100;
   const discountPercentPrice = discountPercent.toFixed();
-  const CreateCourse = ()=>{
-    handleCreateCourse();
-  }
+  const CreateCourse = async () => {
+    await handleCreateCourse();
+  };
   return (
     <div className="w-[90%] 800px:w-[80%] m-auto 800px:mt-24 mt-16">
       <div className="w-full relative">
@@ -161,12 +165,21 @@ const CourseReview: React.FC<Props> = ({
         >
           Previous
         </div>
-        <div
-          className="w-[150px] h-[40px] flex items-center justify-center hover:border hover:bg-white hover:border-blue-500 hover:translate-x-4 transition-all duration-500 bg-[#37a39a] hover:text-[#37a39a] cursor-pointer rounded-full text-white"
-          onClick={() => CreateCourse()}
-        >
-          Create course
-        </div>
+        {type === "create" ? (
+          <div
+            className="w-[150px] h-[40px] flex items-center justify-center hover:border hover:bg-white hover:border-blue-500 hover:translate-x-4 transition-all duration-500 bg-[#37a39a] hover:text-[#37a39a] cursor-pointer rounded-full text-white"
+            onClick={() => CreateCourse()}
+          >
+            Create course
+          </div>
+        ) : (
+          <div
+            className="w-[150px] h-[40px] flex items-center justify-center hover:border hover:bg-white hover:border-blue-500 hover:translate-x-4 transition-all duration-500 bg-[#37a39a] hover:text-[#37a39a] cursor-pointer rounded-full text-white"
+            onClick={() => CreateCourse()}
+          >
+            Edit course
+          </div>
+        )}
       </div>
     </div>
   );

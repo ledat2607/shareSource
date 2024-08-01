@@ -29,29 +29,28 @@ import {
   ExitToAppOutlinedIcon,
 } from "./Icon";
 
-
 interface ItemsProps {
   title: string;
   to: string;
   icon: JSX.Element;
   selected: string;
-  setSelected: React.Dispatch<React.SetStateAction<string>>;
+  setSelected: (title: string) => void;
 }
 
 const Item: FC<ItemsProps> = ({ title, to, icon, selected, setSelected }) => {
+  const { theme } = useTheme();
   return (
     <MenuItem
       active={selected === title}
       onClick={() => setSelected(title)}
       icon={icon}
-      className={`${selected === title ? "bg-slate-500 rounded-2xl" : ""} mt-3`}
+      className="mt-3"
     >
       <Typography className="!text-[16px] !font-Popins">{title}</Typography>
       <Link href={to} />
     </MenuItem>
   );
 };
-
 const AdminSidebar = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalImage, setModalImage] = useState<string | undefined>(undefined);
@@ -60,7 +59,13 @@ const AdminSidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(window.innerWidth <= 800);
   const [selected, setSelected] = useState('Dashboard');
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme(); 
+  const { theme, setTheme } = useTheme();
+
+  const handleMenuItemClick = (title: string) => {
+    setSelected(title);
+    localStorage.setItem('selectedMenuItem', title);
+  };
+
   useEffect(() => {
     setMounted(true);
 
@@ -69,6 +74,11 @@ const AdminSidebar = () => {
     };
 
     window.addEventListener('resize', handleResize);
+
+    const savedSelected = localStorage.getItem('selectedMenuItem');
+    if (savedSelected) {
+      setSelected(savedSelected);
+    }
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -107,7 +117,7 @@ const AdminSidebar = () => {
           color: "#868dfb !important",
         },
         "& .pro-menu-item.active": {
-          color: "#fff !important",
+          color: theme === "dark" ? "#00EE00 !important" : "#FF0000 !important",
         },
         "& .pro-inner-item": {
           padding: "5px 35px 5px 20px !important",
@@ -133,13 +143,12 @@ const AdminSidebar = () => {
             style={{
               position: "sticky",
               top: 0,
-              zIndex: 1000,
-
+              zIndex: 11000,
               padding: isCollapsed ? "0" : "10px",
               borderRadius: "20px",
               boxShadow: "2px 2px rgba(27,26,48,0.2)",
             }}
-            className={`${theme === "dark" ? "bg-slate-700" : ""}`}
+            className={`${theme === "dark" ? "bg-slate-700" : "bg-slate-300"}`}
           >
             <MenuItem
               onClick={() => setIsCollapsed(!isCollapsed)}
@@ -181,13 +190,14 @@ const AdminSidebar = () => {
                   <img
                     onClick={handleImageClick}
                     alt="profile"
-                    src={user?.avatar ? user.avatar.url : avatarDefault}
+                    src={user?.avatar ? user.avatar?.url : avatarDefault}
                     style={{
                       cursor: "pointer",
                       borderRadius: "50%",
                       border: "3px solid #5b6fe6",
                       width: "100px",
                       height: "100px",
+                      zIndex: 11000,
                     }}
                   />
                 </Box>
@@ -216,7 +226,7 @@ const AdminSidebar = () => {
               to="/admin"
               icon={<HomeOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Typography
               variant="h5"
@@ -230,14 +240,14 @@ const AdminSidebar = () => {
               to="/admin/users"
               icon={<PeopleOutlineOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Item
               title="Invoices"
               to="/admin/invoices"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Typography
               variant="h5"
@@ -251,14 +261,14 @@ const AdminSidebar = () => {
               to="/admin/create-course"
               icon={<VideoCallOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Item
               title="All course"
               to="/admin/all-courses"
               icon={<OndemandVideoOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Typography
               variant="h5"
@@ -272,21 +282,21 @@ const AdminSidebar = () => {
               to="/admin/hero"
               icon={<WebOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Item
               title="FAQ"
               to="/admin/faq"
               icon={<QuizOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Item
               title="Categories"
               to="/admin/categories"
               icon={<WysiwygOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Typography
               variant="h5"
@@ -300,7 +310,7 @@ const AdminSidebar = () => {
               to="/admin/manage-team"
               icon={<GroupsOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Typography
               variant="h5"
@@ -314,21 +324,21 @@ const AdminSidebar = () => {
               to="/admin/course-analytics"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Item
               title="Order analytics"
               to="/admin/order-analytics"
               icon={<MapOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Item
               title="User analytics"
               to="/admin/user-analytics"
               icon={<ManageHistoryRoundedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <Typography
               variant="h5"
@@ -342,7 +352,7 @@ const AdminSidebar = () => {
               to="/admin/setttings"
               icon={<SettingsOutlinedIcon />}
               selected={selected}
-              setSelected={setSelected}
+              setSelected={handleMenuItemClick}
             />
             <div onClick={handleLogout}>
               <Item
@@ -350,7 +360,7 @@ const AdminSidebar = () => {
                 to="/admin/logout"
                 icon={<ExitToAppOutlinedIcon />}
                 selected={selected}
-                setSelected={setSelected}
+                setSelected={handleMenuItemClick}
               />
             </div>
           </Box>
@@ -358,7 +368,7 @@ const AdminSidebar = () => {
       </ProSidebar>
       {showModal && modalImage && (
         <motion.div
-          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-50"
+          className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 z-[500000]"
           variants={zoomIn(0.2)}
           initial="hidden"
           animate="show"

@@ -373,9 +373,7 @@ export const getAllUser = CatchAsyncError(async(req:Request, res:Response, next:
 export const updateuserRole = CatchAsyncError(async(req:Request, res:Response, next:NextFunction)=>{
   try {
     const { id, role } = req.body;
-
-    updateUserRoleService(res,id, role);
-    
+    updateUserRoleService(res, id, role);
   } catch (error:any) {
     return next(new ErrorHandle(error.message,404))
   }
@@ -391,7 +389,7 @@ export const deleteOneUser = CatchAsyncError(async(req:Request, res:Response, ne
     if(!user){
       return next(new ErrorHandle("User not exists",404))
     }
-    await user.deleteOne({id})
+    await user.deleteOne({ id });
 
     await redis.del(id);
     
