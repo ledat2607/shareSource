@@ -35,12 +35,12 @@ const page: React.FC<Props> = (props) => {
           description="Elearning is a platform for student to learn and get help from teacher"
           keywords="Elearning, Redux, Web Application"
         />
-        <div className="flex h-[100vh]">
+        <div className="flex min-h-screen">
           <div className="1500px:w-[16%] w-1/5">
             <AdminSidebar />
           </div>
-          <div className="w-[85%] p-2">
-            <DashboardHero />
+          <div className="w-[85%] mt-20 p-2">
+            <DashboardHero isDashboard={true} />
           </div>
         </div>
       </AdminProtected>

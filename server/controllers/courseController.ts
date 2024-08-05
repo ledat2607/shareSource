@@ -41,7 +41,6 @@ export const updateCourse = CatchAsyncError(async (req: Request, res: Response, 
     const data = req.body;
     const { thumbnail } = data;
 
-    console.log("Received Data:", data);
 
     if (thumbnail) {
       // Check if thumbnail is an object with public_id or a URL string
@@ -158,19 +157,35 @@ export const getAllCourse = CatchAsyncError(
     try {
       const isExists = await redis.get("allCourses");
       if (isExists) {
-        const course = JSON.parse(isExists);
-        return res.status(200).json({
-          success: true,
-          course,
-        });
-      } else {
-        const courses = await CourseModel.find().select(
-          "-courseData.videoUrl -courseData.suggestion -courseData.question -courseData.link"
+        const existingCourses = JSON.parse(isExists);
+
+        const allCourse = await CourseModel.find()
+          .sort({ createdAt: -1 })
+          .select(
+            "-courseData.videoUrl -courseData.suggestion -courseData.question -courseData.link"
+          );
+
+        // Filter out courses that already exist in Redis
+        const filteredCourses = allCourse.filter(
+          (course) =>
+            !existingCourses.some(
+              (existingCourse: any) => existingCourse._id === course._id
+            )
         );
 
-        // Kiểm tra xem có dữ liệu nào được tìm thấy không
+        return res.status(200).json({
+          success: true,
+          course: filteredCourses,
+        });
+      } else {
+        const courses = await CourseModel.find()
+          .sort({ createdAt: -1 })
+          .select(
+            "-courseData.videoUrl -courseData.suggestion -courseData.question -courseData.link"
+          );
+
+        // Check if no courses were found
         if (courses.length === 0) {
-          // Nếu không có khóa học nào, trả về thông báo phù hợp
           return res.status(200).json({
             success: true,
             message: "No courses found",
@@ -178,7 +193,7 @@ export const getAllCourse = CatchAsyncError(
           });
         }
 
-        // Lưu trữ dữ liệu vào Redis
+        // Store data in Redis
         await redis.set("allCourses", JSON.stringify(courses));
         return res.status(200).json({
           success: true,
@@ -345,9 +360,9 @@ export const addReviewData = CatchAsyncError(async(req:Request,res:Response,next
   const userCourseList = (req as any).user?.courses;
   const courseId = req.params.id;
   const courseExists = userCourseList?.some(
-    (course: any) => course._id.toString() === courseId.toString()
+    (course: any) => course.courseId === courseId.toString()
   );
-  if(!courseExists){
+  if (!courseExists) {
     return next(
       new ErrorHandle("You are not eligible to access this course", 404)
     );

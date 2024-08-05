@@ -2,11 +2,12 @@ import { ThemSwitcher } from '@/app/utils/ThemSwitcher';
 import React, { useState } from 'react'
 import { IoNotificationsOutline } from 'react-icons/io5';
 
-type Props = {}
+type Props = {
+  open?: boolean;
+  setOpen?: any;
+};
 
-const DashboardHeader = (props: Props) => {
-    const [open, setOpen] = useState(false);
-
+const DashboardHeader: React.FC<Props> = ({ open, setOpen }) => {
   return (
     <div className="w-full bg-white dark:bg-slate-900 flex items-center p-3 justify-end fixed top-0 800px:right-6 right-0">
       <ThemSwitcher />
@@ -20,8 +21,8 @@ const DashboardHeader = (props: Props) => {
         </span>
       </div>
       {open && (
-        <div className="800px:w-[450px] w-[75%] h-[90vh] dark:bg-[#111c43] p-3 bg-gray-300 shadow-xl absolute top-16 800px:z-10 rounded-xl">
-          <h5 className="text-center text-[20px] font-Popins text-black dark:text-white p-3 font-[700]">
+        <div className="800px:w-[450px] w-[75%] h-[90vh] dark:bg-[#111c43] p-3 bg-gray-300 shadow-xl absolute top-16 800px:z-[100] rounded-xl">
+          <h5 className="text-center text-[20px] font-Popins text-black dark:text-white p-3 font-[700] z-[100]">
             Notifications
           </h5>
           <div className="dark:bg-[#2d3a4ea1] bg-teal-300 rounded-2xl p-3 font-Popins border dark:border-[#000000c1] border-b-[#0000002c]">

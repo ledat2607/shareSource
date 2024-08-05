@@ -7,9 +7,12 @@ import DashboardHeader from '@/app/components/admin/DashboardHeader';
 import EditHero from "../../components/admin/EditHero";
 
 
-type Props = {}
+type Props = {
+  open: boolean;
+  setOpen?: any;
+}
 
-const page: React.FC<Props> = () => {
+const page: React.FC<Props> = ({ open, setOpen }) => {
   return (
     <div>
       <AdminProtected>
@@ -23,7 +26,7 @@ const page: React.FC<Props> = () => {
             <AdminSidebar />
           </div>
           <div className="w-[85%] min-h-screen p-1">
-            <DashboardHeader />
+            <DashboardHeader open={open} setOpen={setOpen} />
             <EditHero />
           </div>
         </div>

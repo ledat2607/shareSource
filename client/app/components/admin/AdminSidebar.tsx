@@ -223,7 +223,7 @@ const AdminSidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "4%"}>
             <Item
               title="Dashboard"
-              to="/admin"
+              to="/admin/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={handleMenuItemClick}

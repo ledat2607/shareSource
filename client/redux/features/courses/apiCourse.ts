@@ -33,6 +33,20 @@ export const apiCourse = apiSlide.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+    getAllUserCourses: builder.query({
+      query: () => ({
+        url: "get-all-course",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+    getCourse: builder.query({
+      query: (id) => ({
+        url: `get-course/${id}`,
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -41,4 +55,6 @@ export const {
   useGetAllCourseQuery,
   useDeleteCourseMutation,
   useEditCourseMutation,
+  useGetAllUserCoursesQuery,
+  useGetCourseQuery,
 } = apiCourse;

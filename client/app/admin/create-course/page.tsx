@@ -5,10 +5,12 @@ import Heading from '@/app/utils/Heading';
 import CreateCourse from "../../components/admin/Course/CreateCourse";
 import AdminProtected from '@/app/hooks/adminProtected';
 import DashboardHeader from '@/app/components/admin/DashboardHeader';
+type Props = {
+  open: boolean;
+  setOpen?: any;
+}
 
-type Props = {}
-
-const page: React.FC<Props> = () => {
+const page: React.FC<Props> = ({ open, setOpen }) => {
   return (
     <div>
       <AdminProtected>
@@ -22,7 +24,7 @@ const page: React.FC<Props> = () => {
             <AdminSidebar />
           </div>
           <div className="w-[85%] min-h-screen p-1">
-            <DashboardHeader />
+          <DashboardHeader open={open} setOpen={setOpen} />
             <CreateCourse />
           </div>
         </div>

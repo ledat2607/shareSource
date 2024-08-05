@@ -252,7 +252,11 @@ const CourseInformation: React.FC<Props> = ({
           >
             {courseInfo?.thumbnail ? (
               <img
-                src={courseInfo.thumbnail.url}
+                src={
+                  courseInfo.thumbnail.url
+                    ? courseInfo.thumbnail.url
+                    : courseInfo.thumbnail
+                }
                 alt=""
                 className="h-[10vh] object-contain"
               />

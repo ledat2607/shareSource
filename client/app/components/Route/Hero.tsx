@@ -5,11 +5,14 @@ import { motion } from "framer-motion";
 import { BsArrowRight } from 'react-icons/bs';
 import Image from "next/image";
 import Link from "next/link";
+import { useGetHeroDataQuery } from "@/redux/features/layout/layoutApi";
 type Props = {};
 
 const Hero: FC<Props> = (props) => {
+  const { data, refetch } = useGetHeroDataQuery("Banner", {});
+
   return (
-    <div className="w-full 1000px:flex 1000px:mt-[100px] relative">
+    <div className="w-full 1000px:flex 1000px:mt-[100px] relative mb-20">
       <div className="absolute -left-[100px] -top-[300px] blur-2xl 1500px:h-[700px] 1500px:w-[700px] 1100px:h-[600px] 1100px:w-[600px] h-[24vh] w-[50vw] hero-animation rounded-full"></div>
       <div className="1000px:w-[40%] 1100px:w-[55%] 800px:w-[60%] w-[40%] mx-auto flex justify-center mt-[50px] 1000px:pt-0 z-10">
         <motion.div
@@ -22,7 +25,7 @@ const Hero: FC<Props> = (props) => {
           <img
             width={500}
             height={500}
-            src="https://media.istockphoto.com/id/1300479137/vector/happy-woman-chatting-or-dating-with-boyfriend.jpg?s=612x612&w=0&k=20&c=ThXnFOvbBDdaw8F7Ou9Lq63ZP-UXQFPIpZzgLLzrGms="
+            src={data?.layoutData.banner.image.url}
             alt=""
             className="object-cover rounded-full 1000px:w-[500px] 1000px:h-[500px] w-full h-[170px]"
           />
@@ -36,11 +39,7 @@ const Hero: FC<Props> = (props) => {
           exit="hidden"
           className="dark:text-white flex-initial capitalize items-center text-black text-[30px] w-[90%] 1000px:text-[50px] font-[600] font-Josefin 1000px:leading-[75px]"
         >
-          Improve your online learning experiences{" "}
-          <b className="dark:text-green-500 text-red-500 uppercase">
-            {" "}
-            Better instance
-          </b>
+          {data?.layoutData.banner.title}
         </motion.h2>
         <br />
         <motion.p
@@ -50,8 +49,7 @@ const Hero: FC<Props> = (props) => {
           exit="hidden"
           className="dark:text-white text-black font-Popins w-[90%] font-[600] 1000px:text-[20px] text-[18px]"
         >
-          We have 40K+ online course & 500K+ online register user. Find your
-          desired course from them.
+          {data?.layoutData.banner.subTitle}
         </motion.p>
         <motion.div
           variants={fadeIn("right", 0.5)}
