@@ -118,7 +118,6 @@ const EditCourse: React.FC<Props> = ({ id }) => {
       await editCourse({ id: editCourseData._id, data: course });
     }
   };
-  console.log(course);
   return (
     <div className="w-full flex min-h-screen">
       <div className="800px:w-[80%] w-full">

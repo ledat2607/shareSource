@@ -36,19 +36,31 @@ const CourseContent: React.FC<Props> = ({
     updateCollaped[index] = !updateCollaped[index];
     setIsCollaped(updateCollaped);
   };
-
   const handleRemovelink = (index: number, linkIndex: number) => {
-    const updateLink = [...courseContentData];
-    updateLink[index]?.links.splice(linkIndex, 1);
+    const updateLink = courseContentData.map((item: any, i: number) => {
+      if (i === index) {
+        return {
+          ...item,
+          links: item.links.filter((_: any, li: number) => li !== linkIndex),
+        };
+      }
+      return item;
+    });
     setCourseContentData(updateLink);
   };
 
   const handeAddLink = (index: number) => {
-    const updateData = [...courseContentData];
-    updateData[index].links.push({ title: '', url: '' });
+    const updateData = courseContentData.map((item: any, i: number) => {
+      if (i === index) {
+        return {
+          ...item,
+          links: [...item.links, { title: "", url: "" }],
+        };
+      }
+      return item;
+    });
     setCourseContentData(updateData);
   };
-
   const newContentHandled = (item: any) => {
     if (
       item.title === "" ||
@@ -58,20 +70,17 @@ const CourseContent: React.FC<Props> = ({
       item.links[0].title === "" ||
       item.links[0].url === ""
     ) {
-      toast.error("Please fill enough information !");
+      toast.error("Please fill enough information!");
     } else {
-      let newVideoSection = "";
       const lastVideoSection =
-        courseContentData[courseContentData.length - 1].videoSection;
-      if (lastVideoSection) {
-        newVideoSection = lastVideoSection;
-      }
+        courseContentData[courseContentData.length - 1]?.videoSection ||
+        "Untitled Section 1";
       const newContent = {
         videoUrl: "",
         title: "",
         description: "",
         videoLength: "",
-        videoSection: newVideoSection,
+        videoSection: lastVideoSection,
         links: [{ title: "", url: "" }],
       };
       setCourseContentData([...courseContentData, newContent]);
@@ -107,13 +116,14 @@ const CourseContent: React.FC<Props> = ({
   };
 
   const NextButton = () => {
+    const lastItem = courseContentData[courseContentData.length - 1];
     if (
-      courseContentData[courseContentData.length - 1].title === "" ||
-      courseContentData[courseContentData.length - 1].videoUrl === "" ||
-      courseContentData[courseContentData.length - 1].links[0].title === "" ||
-      courseContentData[courseContentData.length - 1].links[0].url === "" ||
-      courseContentData[courseContentData.length - 1].description === "" ||
-      courseContentData[courseContentData.length - 1].videoLength === ""
+      lastItem.title === "" ||
+      lastItem.videoUrl === "" ||
+      lastItem.links[0].title === "" ||
+      lastItem.links[0].url === "" ||
+      lastItem.description === "" ||
+      lastItem.videoLength === ""
     ) {
       toast.error("Section can't be empty");
     } else {
@@ -327,9 +337,11 @@ const CourseContent: React.FC<Props> = ({
                           value={link.title}
                           onChange={(e) => {
                             const updateData = [...courseContentData];
-                            updateData[index].links[linkIndex] = {
-                              ...link,
-                              title: e.target.value,
+                            updateData[index] = {
+                              ...updateData[index],
+                              links: updateData[index].links.map((linkItem:any, i:number) =>
+                                i === linkIndex ? { ...linkItem, title: e.target.value } : linkItem
+                              ),
                             };
                             setCourseContentData(updateData);
                           }}
@@ -341,9 +353,11 @@ const CourseContent: React.FC<Props> = ({
                           value={link.url}
                           onChange={(e) => {
                             const updateData = [...courseContentData];
-                            updateData[index].links[linkIndex] = {
-                              ...link,
-                              url: e.target.value,
+                            updateData[index] = {
+                              ...updateData[index],
+                              links: updateData[index].links.map((linkItem:any, i:number) =>
+                                i === linkIndex ? { ...linkItem, url: e.target.value } : linkItem
+                              ),
                             };
                             setCourseContentData(updateData);
                           }}

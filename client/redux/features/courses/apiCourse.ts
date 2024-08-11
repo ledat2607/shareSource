@@ -47,6 +47,45 @@ export const apiCourse = apiSlide.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+    getCourseConten: builder.query({
+      query: (id: any) => ({
+        url: `get-course-content/${id}`,
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+    addNewQuestion: builder.mutation({
+      query: ({ question, courseId, contentId }) => ({
+        url: "add-question",
+        method: "PUT",
+        body: { question, courseId, contentId },
+        credentials: "include" as const,
+      }),
+    }),
+    addAnswerInQuestion: builder.mutation({
+      query: ({ answer, courseId, contentId, questionId }) => ({
+        url: "add-answer",
+        method: "PUT",
+        body: { answer, courseId, contentId, questionId },
+        credentials: "include" as const,
+      }),
+    }),
+    addReview: builder.mutation({
+      query: ({ review, rating, courseId }: any) => ({
+        url: `add-review/${courseId}`,
+        method: "PUT",
+        body: { review, rating },
+        credentials: "include" as const,
+      }),
+    }),
+    addReplyReview: builder.mutation({
+      query: ({ comment, courseId, reviewId }) => ({
+        url: "add-review-reply",
+        method: "PUT",
+        body: { comment, courseId, reviewId },
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -57,4 +96,9 @@ export const {
   useEditCourseMutation,
   useGetAllUserCoursesQuery,
   useGetCourseQuery,
+  useGetCourseContenQuery,
+  useAddNewQuestionMutation,
+  useAddAnswerInQuestionMutation,
+  useAddReviewMutation,
+  useAddReplyReviewMutation
 } = apiCourse;

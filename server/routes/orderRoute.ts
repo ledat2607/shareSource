@@ -1,5 +1,5 @@
 import express from "express"
-import { createOrder, getAllOrderAdmin } from "../controllers/orderController";
+import { createOrder, getAllOrderAdmin, newPayment, sendStripePublisKey } from "../controllers/orderController";
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
 import { updateAccessToken } from "../controllers/useController";
 const orderRoute = express.Router();
@@ -8,7 +8,7 @@ orderRoute.post(
   "/add-course",
   updateAccessToken,
   isAuthenticated,
-  authorizeRoles("user"),
+  //authorizeRoles("user"),
   createOrder
 );
 orderRoute.get(
@@ -18,4 +18,6 @@ orderRoute.get(
   authorizeRoles("admin"),
   getAllOrderAdmin
 );
+orderRoute.get("/payment/stripepublishablekey", sendStripePublisKey);
+orderRoute.post("/payment", isAuthenticated, newPayment);
 export default orderRoute;

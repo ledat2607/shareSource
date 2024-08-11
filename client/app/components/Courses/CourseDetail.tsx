@@ -1,23 +1,37 @@
-import Rating from '@/app/utils/Rating';
-import React from 'react'
-import { IoCheckboxOutline, IoCheckmarkDoneOutline } from 'react-icons/io5';
-import { useSelector } from 'react-redux';
-import { format } from 'timeago.js';
-
+import CoursePlayer from "@/app/utils/CoursePlayer";
+import Rating from "@/app/utils/Rating";
+import Link from "next/link";
+import React, { useState } from "react";
+import { IoCheckmarkDoneOutline, IoCloseOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
+import { format } from "timeago.js";
+import CourseContentList from "../Courses/CourseContentList";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckOutForm from "../CheckOut/CheckOutForm";
+import { useLoadUserQuery } from "@/redux/features/api/appSlice";
 type Props = {
   data: any;
+  stripePromise: any;
+  clientSecret: any;
 };
 
-const CourseDetail: React.FC<Props> = ({ data }) => {
-  const { user } = useSelector((state: any) => state.auth);
+const CourseDetail: React.FC<Props> = ({
+  data,
+  clientSecret,
+  stripePromise,
+}: any) => {
+  const { data: userData } = useLoadUserQuery({});
+  const user = userData?.user;
+  const [open, setOpen] = useState(false);
   const discountPercent =
     ((data.estimatePrice - data.price) / data.estimatePrice) * 100;
   const discountPercentPrice = discountPercent.toFixed(0);
   const isPurchased =
-    user && user?.courses.find((item: any) => item._id === data._id);
+    user && user?.courses.find((item: any) => item.courseId === data._id);
   const handleOrder = () => {
-    console.log(`ggg`);
+    setOpen(true);
   };
+  console.log(userData)
   return (
     <div className="w-[90%] 800px:w-[95%] m-auto py-5">
       <div className="w-full flex flex-col-reverse 800px:flex-row">
@@ -74,6 +88,7 @@ const CourseDetail: React.FC<Props> = ({ data }) => {
           <h1 className="text-[25px] font-Popins font-[600] text-black dark:text-white">
             Course Overview
           </h1>
+          <CourseContentList data={data.courseData} />
           <br />
           <br />
           <div className="w-full">
@@ -134,7 +149,76 @@ const CourseDetail: React.FC<Props> = ({ data }) => {
             )
           )}
         </div>
+        <div className="w-full 800px:w-[35%] relative">
+          <div className="sticky top-[100px] left-8 z-50 w-full">
+            <CoursePlayer videoUrl={data?.demoUrl} title={data.title} />
+            <div className="flex mt-2 items-center justify-between w-[50%]">
+              <h1 className="pl-5 items-center text-[30px] font-Popins font-[600] text-black dark:text-white">
+                {data.price === 0 ? "Free" : data.price + " $"}
+              </h1>
+              <h5 className="pl-3 text-[25px] line-through opacity-50 text-black dark:text-white">
+                {data?.estimatePrice ? data.estimatePrice : ""}
+              </h5>
+              <h5 className="ml-3 text-[18px] text-black dark:text-[crimson]">
+                Sale {discountPercentPrice} % Off
+              </h5>
+            </div>
+            <div className="flex mt-4 items-center">
+              {isPurchased ? (
+                <Link
+                  className="w-[200px] flex items-center justify-center hover:dark:bg-white hover:bg-gray-200 hover:text-[crimson] py-3 px-3 rounded-2xl text-white text-[16px] font-Popins cursor-pointer bg-[crimson] hover:translate-x-3 transition-all duration-300"
+                  href={`/course-access/${data._id}`}
+                >
+                  Enter this course
+                </Link>
+              ) : (
+                <div
+                  onClick={handleOrder}
+                  className="w-[120px] hover:dark:bg-white hover:bg-gray-200 hover:text-[crimson] py-3 px-3 rounded-2xl text-white text-[16px] font-Popins cursor-pointer bg-[crimson] hover:translate-x-3 transition-all duration-300"
+                >
+                  Buy {data.price} $ now
+                </div>
+              )}
+            </div>
+            <br />
+            <p className="pb-1 text-black dark:text-white flex items-center">
+              <IoCheckmarkDoneOutline className="mr-4" /> Source code include
+            </p>
+            <p className="pb-1 text-black dark:text-white flex items-center">
+              <IoCheckmarkDoneOutline className="mr-4" /> Full lifeline access
+            </p>
+            <p className="pb-1 text-black dark:text-white flex items-center">
+              <IoCheckmarkDoneOutline className="mr-4" /> Premium Support
+            </p>
+            <p className="pb-1 text-black dark:text-white flex items-center">
+              <IoCheckmarkDoneOutline className="mr-4" /> Certificate of
+              completion
+            </p>
+          </div>
+        </div>
       </div>
+      {
+        <>
+          {open && (
+            <div className="w-full h-screen bg-[#cccccc34] fixed top-0 left-0 z-[50000] flex items-center justify-center">
+              <div className="w-[500px] min-h-[500px] bg-white rounded-xl shadow p-3">
+                <div className="w-full flex justify-end">
+                  <IoCloseOutline
+                    size={25}
+                    className="text-black cursor-pointer"
+                    onClick={() => setOpen(false)}
+                  />
+                </div>
+                {stripePromise && clientSecret && (
+                  <Elements stripe={stripePromise} options={{ clientSecret }}>
+                    <CheckOutForm setOpen={setOpen} data={data} />
+                  </Elements>
+                )}
+              </div>
+            </div>
+          )}
+        </>
+      }
     </div>
   );
 };

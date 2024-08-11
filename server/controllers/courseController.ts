@@ -145,7 +145,6 @@ export const getSignleCourse = CatchAsyncError(async(req:Request,res:Response,ne
         course,
       });
     }
-   
   } catch (error:any) {
     return next(new ErrorHandle(error.message,404))
   }
@@ -212,13 +211,13 @@ export const getCourseByUser = CatchAsyncError(async(req:Request,res:Response,ne
     const userCourseList = (req as any).user?.courses;
     const courseId = req.params.id;
     const courseExists = userCourseList?.find(
-      (course: any) => course._id.toString() === courseId
+      (course: any) => course.courseId.toString() === courseId
     );
     if (!courseExists) {
       return next(new ErrorHandle("You are not eligible", 404));
     }
     const course = await CourseModel.findById(courseId);
-    const content = course?.courseData;
+    const content = course;
     res.status(200).json({
       success: true,
       content,
@@ -285,7 +284,6 @@ export const addAnswer = CatchAsyncError(async(req:Request,res:Response,next:Nex
     const { answer, courseId, contentId, questionId }: IAddAnserData = req.body;
     const course = await CourseModel.findById(courseId);
 
-
     if(!mongoose.Types.ObjectId.isValid(contentId)){
       return next(new ErrorHandle("Invalid content ID", 404));
     }
@@ -301,9 +299,11 @@ export const addAnswer = CatchAsyncError(async(req:Request,res:Response,next:Nex
     if(!question){
       return next(new ErrorHandle("Invalid question id",404))
     }
-    const newAnswer:any = {
+    const newAnswer: any = {
       user: (req as any).user,
       answer,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
     question.questionReplies.push(newAnswer);
 
@@ -354,50 +354,48 @@ interface IReviewData {
   rating: number;
   userId: string;
 }
-
+//add review data
 export const addReviewData = CatchAsyncError(async(req:Request,res:Response,next:NextFunction)=>{
   try {
-  const userCourseList = (req as any).user?.courses;
-  const courseId = req.params.id;
-  const courseExists = userCourseList?.some(
-    (course: any) => course.courseId === courseId.toString()
-  );
-  if (!courseExists) {
-    return next(
-      new ErrorHandle("You are not eligible to access this course", 404)
+    const userCourseList = (req as any).user?.courses;
+    const courseId = req.params.id;
+    const courseExists = userCourseList?.some(
+      (course: any) => course.courseId === courseId.toString()
     );
-  }
-  const course = await CourseModel.findById(courseId);
+    if (!courseExists) {
+      return next(
+        new ErrorHandle("You are not eligible to access this course", 404)
+      );
+    }
+    const course = await CourseModel.findById(courseId);
 
-  const { review, rating } = req.body as IReviewData;
+    const { review, rating } = req.body as IReviewData;
 
-  const reviewData: any = {
-    user: (req as any).user,
-    comment: review,
-    rating: rating,
-  };
-  course?.reviews.push(reviewData);
-  let avg = 0;
-  course?.reviews.forEach((rev:any)=>{
-    avg += rev.rating;
-  })
-  if(course){
-    course.rating = avg / course.reviews.length;
-  }
-  await course?.save();
+    const reviewData: any = {
+      user: (req as any).user,
+      comment: review,
+      rating: rating,
+    };
+    course?.reviews.push(reviewData);
+    let avg = 0;
+    course?.reviews.forEach((rev: any) => {
+      avg += rev.rating;
+    });
+    if (course) {
+      course.rating = avg / course.reviews.length;
+    }
+    await course?.save();
 
-  const notification = {
-    title: "New review Receive",
-    message: `${(req as any).user?.name} has given a review in ${course?.name}`,
-  };
-
-
-  //create notification
-  res.status(200).json({
-    success: true,
-    course,
-  });
-
+    await NotificationModel.create({
+      user: (req as any).user._id,
+      title: "New review received",
+      message: `You have a new reply for ${course?.name}`,
+    });
+    //create notification
+    res.status(200).json({
+      success: true,
+      course,
+    });
   } catch (error:any) {
     return next(new ErrorHandle(error.message,404))
   }
@@ -426,6 +424,8 @@ export const addReviewReply = CatchAsyncError(async(req:Request,res:Response, ne
     const replyData: any = {
       user: (req as any).user,
       comment,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
     if(!review.comentReplies){
       review.comentReplies = [];
@@ -479,3 +479,5 @@ export const generateVideoUrl = CatchAsyncError(async(req:Request,res:Response, 
   return next(new ErrorHandle(error.message, 404));    
   }
 })
+
+
