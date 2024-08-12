@@ -183,7 +183,7 @@ const CourseInformation: React.FC<Props> = ({
             >
               <option value="">Choose category</option>
               {categories.map((i: any, index: number) => (
-                <option value={i._id} key={index}>
+                <option value={i.title} key={index}>
                   {i.title}
                 </option>
               ))}

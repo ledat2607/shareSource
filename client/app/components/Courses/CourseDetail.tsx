@@ -13,12 +13,16 @@ type Props = {
   data: any;
   stripePromise: any;
   clientSecret: any;
+  setRoute: any;
+  setOpen: any;
 };
 
 const CourseDetail: React.FC<Props> = ({
   data,
   clientSecret,
   stripePromise,
+  setRoute,
+  setOpen: openAuthen,
 }: any) => {
   const { data: userData } = useLoadUserQuery({});
   const user = userData?.user;
@@ -29,9 +33,13 @@ const CourseDetail: React.FC<Props> = ({
   const isPurchased =
     user && user?.courses.find((item: any) => item.courseId === data._id);
   const handleOrder = () => {
-    setOpen(true);
+    if (userData) {
+      setOpen(true);
+    }else{
+      setRoute("Login")
+      openAuthen(true);
+    }
   };
-  console.log(userData)
   return (
     <div className="w-[90%] 800px:w-[95%] m-auto py-5">
       <div className="w-full flex flex-col-reverse 800px:flex-row">
