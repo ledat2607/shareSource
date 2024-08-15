@@ -1,5 +1,5 @@
 import express from "express"
-import {register,activationUser, loginUser, LogoutUser, updateAccessToken, getUserInfo, socialAuth, updateUserInfo, updatePassword, updateAvatar, getAllUser, updateuserRole, deleteOneUser} from "../controllers/useController"
+import {register,activationUser, loginUser, LogoutUser, updateAccessToken, getUserInfo, socialAuth, updateUserInfo, updatePassword, updateAvatar, getAllUser, updateuserRole, deleteOneUser, updateStatusCourse} from "../controllers/useController"
 import { authorizeRoles, isAuthenticated } from "../middleware/auth";
 const userRouter = express.Router();
 
@@ -39,5 +39,11 @@ userRouter.delete(
   isAuthenticated,
   authorizeRoles("admin"),
   deleteOneUser
+);
+userRouter.put(
+  "/update-course",
+  updateAccessToken,
+  updateStatusCourse,
+  isAuthenticated
 );
 export default userRouter;

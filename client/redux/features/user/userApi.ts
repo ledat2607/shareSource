@@ -48,6 +48,14 @@ export const userApi = apiSlide.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+    updateCourse: builder.mutation({
+      query: ({ userId, courseId }) => ({
+        url: "update-course",
+        method: "PUT",
+        body: { userId, courseId },
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -58,4 +66,5 @@ export const {
   useGetAllUserQuery,
   useUpdateRoleMutation,
   useDeleteUserMutation,
+  useUpdateCourseMutation,
 } = userApi;

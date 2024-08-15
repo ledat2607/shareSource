@@ -25,7 +25,7 @@ const Courses = (props: Props) => {
           {courseData &&
             courseData.map((item: any, index: number) => (
               <>
-                <CourseCard item={item} index={index} />
+                <CourseCard item={item} index={index} isProfile={false} />
               </>
             ))}
         </div>

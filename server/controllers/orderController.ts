@@ -83,7 +83,10 @@ export const createOrder = CatchAsyncError(
         });
       }
 
-      user.courses.push({ courseId: course._id.toString() });
+      user.courses.push({
+        courseId: course._id.toString(),
+        status: "Progressing",
+      });
       await redis.set((req as any).user?._id, JSON.stringify(user));
       await user?.save();
 

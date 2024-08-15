@@ -182,7 +182,7 @@ const CourseDetail: React.FC<Props> = ({
               ) : (
                 <div
                   onClick={handleOrder}
-                  className="w-[120px] hover:dark:bg-white hover:bg-gray-200 hover:text-[crimson] py-3 px-3 rounded-2xl text-white text-[16px] font-Popins cursor-pointer bg-[crimson] hover:translate-x-3 transition-all duration-300"
+                  className="w-[150px] flex items-center justify-center hover:dark:bg-white hover:bg-gray-200 hover:text-[crimson] py-3 px-3 rounded-2xl text-white text-[16px] font-Popins cursor-pointer bg-[crimson] hover:translate-x-3 transition-all duration-300"
                 >
                   Buy {data.price} $ now
                 </div>

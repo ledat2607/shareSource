@@ -93,7 +93,7 @@ const Header: React.FC<Props> = ({
             <div>
               <Link
                 href={"/"}
-                className={`text-[25px] font-Popins font-[500] dark:text-white text-red-500`}
+                className={`text-[25px] font-Popins font-[500] dark:text-white text-red-500 cursor-pointer`}
               >
                 LMS - Elearning
               </Link>

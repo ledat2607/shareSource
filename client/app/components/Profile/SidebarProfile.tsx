@@ -109,26 +109,6 @@ const SidebarProfile: React.FC<Props> = ({
           Payment methods
         </h5>
       </div>
-      <div
-        className={`w-full mt-2 overflow-hidden hover:dark:bg-slate-500 hover:bg-blue-400 hover:rounded-3xl hover:scale-105 duration-300 flex items-center justify-center 800px:justify-start px-3 py-4 cursor-pointer rounded-xl ${
-          active === 5
-            ? "dark:bg-slate-800 bg-slate-400 shadow-2xl"
-            : "bg-transparent "
-        } `}
-        onClick={() => setActice(5)}
-      >
-        <AiOutlineMessage size={20} className="text-black dark:text-white" />
-        <h5
-          className={`pl-8 800px:block hidden text-[17px] font-Popins  ${
-            active === 5
-              ? "text-white dark:text-gray-100 font-[700]"
-              : "text-black dark:text-gray-400"
-          }`}
-        >
-          {" "}
-          Chat rooms
-        </h5>
-      </div>
       {user?.role === "admin" ? (
         <Link href={"/admin"}>
           <div
