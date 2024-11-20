@@ -95,7 +95,7 @@ const Header: React.FC<Props> = ({
                 href={"/"}
                 className={`text-[25px] font-Popins font-[500] dark:text-white text-red-500 cursor-pointer`}
               >
-                LMS - Elearning
+                TP - Elearning
               </Link>
             </div>
             <div className="flex items-center">
@@ -147,7 +147,7 @@ const Header: React.FC<Props> = ({
               }}
             >
               <h1 className="flex items-center mt-5 text-[30px] dark:text-red-500 text-black">
-                LMS
+                TP
                 <p className="ml-2 text-[25px] dark:!text-white text-green-500">
                   Elearning.
                 </p>

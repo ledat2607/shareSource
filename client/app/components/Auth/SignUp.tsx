@@ -74,7 +74,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
   const { errors, touched, values, handleChange, handleSubmit } = formik;
   return (
     <div className="w-full">
-      <h1 className={`${styles.title} mb-10`}>Join LMS - Elearning</h1>
+      <h1 className={`${styles.title} mb-10`}>Join TP - Elearning</h1>
       <form onSubmit={handleSubmit}>
         <label className={`${styles.label}`} htmlFor="name">
           Enter your full name

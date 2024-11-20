@@ -7,7 +7,7 @@ const Footer = (props: Props) => {
   return (
     <>
       <h2 className="text-[40px] font-Popins font-[700] text-gradient mt-6">
-        LMS-Elearning
+        TP-Elearning
       </h2>
       <footer className="footer-gradient">
         <div className="p-3">

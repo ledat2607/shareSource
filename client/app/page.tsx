@@ -16,7 +16,7 @@ const Page: FC<Props> = ()=>{
   return (
     <div>
       <Heading
-        title="LMS-Elearning"
+        title="TP-Elearning"
         description="Elearning is a platform for student to learn and get help from teacher"
         keywords="Elearning, Redux, Web Application"
       />

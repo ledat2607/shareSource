@@ -12,38 +12,40 @@ import CourseCard from "../components/Courses/CourseCard";
 type Props = {};
 
 const page = (props: Props) => {
+  const token = localStorage.getItem("token");
   const searchParams = useSearchParams();
   const search = searchParams?.get("title");
   const { data, isLoading } = useGetAllUserCoursesQuery(undefined, {});
   const { data: categories } = useGetHeroDataQuery("Category");
   const categoriesData = categories?.layoutData.category;
+
   const [route, setRoute] = useState("Login");
   const [open, setOpen] = useState(false);
   const [course, setCourse] = useState([]);
   const [category, setCategory] = useState("ALL");
-
-  console.log(course);
-
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
     if (data && data.course) {
       let filteredCourses = data.course;
 
+      // Lọc theo category
       if (category !== "ALL") {
         filteredCourses = filteredCourses.filter(
           (item: any) => item.categories === category
         );
       }
 
-      if (search) {
+      // Lọc theo từ khóa tìm kiếm
+      if (searchKeyword) {
         filteredCourses = filteredCourses.filter((item: any) =>
-          item.name.toLowerCase().includes(search.toLowerCase())
+          item.name.toLowerCase().includes(searchKeyword.toLowerCase())
         );
       }
 
       setCourse(filteredCourses);
     }
-  }, [data, category, search]);
+  }, [data, category, searchKeyword]);
 
   return (
     <div>
@@ -74,7 +76,7 @@ const page = (props: Props) => {
                 ALL
               </div>
               {categoriesData &&
-                categoriesData?.map((item: any, index: number) => (
+                categoriesData.map((item: any, index: number) => (
                   <div key={index}>
                     <div
                       className={`h-[35px] ${
@@ -89,13 +91,25 @@ const page = (props: Props) => {
                   </div>
                 ))}
             </div>
+
+            {/* Thêm thẻ input để nhập từ khóa */}
+            <div className="w-full mt-4">
+              <input
+                type="text"
+                placeholder="Search for courses..."
+                className="w-[40%] p-2 border border-gray-300 rounded-md text-black dark:text-white"
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+              />
+            </div>
+
             {course && course.length === 0 && (
               <p
                 className={`${styles.label} justify-center min-h-[50vh] flex items-center`}
               >
-                {search
-                  ? "No course found"
-                  : "No course found in this category. Please try another one !"}
+                {searchKeyword
+                  ? "No course found matching your search"
+                  : "No course found in this category. Please try another one!"}
               </p>
             )}
             <br />
