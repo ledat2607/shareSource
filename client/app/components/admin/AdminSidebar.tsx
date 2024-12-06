@@ -222,7 +222,7 @@ const AdminSidebar = () => {
           </div>
           <Box paddingLeft={isCollapsed ? undefined : "4%"}>
             <Item
-              title="Dashboard"
+              title="Quản lý"
               to="/admin/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
@@ -236,14 +236,14 @@ const AdminSidebar = () => {
               {!isCollapsed && "Data"}
             </Typography>
             <Item
-              title="Users"
+              title="Học viên"
               to="/admin/users"
               icon={<PeopleOutlineOutlinedIcon />}
               selected={selected}
               setSelected={handleMenuItemClick}
             />
             <Item
-              title="Invoices"
+              title="Lượt đăng ký"
               to="/admin/invoices"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
@@ -257,14 +257,14 @@ const AdminSidebar = () => {
               {!isCollapsed && "Content"}
             </Typography>
             <Item
-              title="Create course"
+              title="Thêm mới khóa học"
               to="/admin/create-course"
               icon={<VideoCallOutlinedIcon />}
               selected={selected}
               setSelected={handleMenuItemClick}
             />
             <Item
-              title="All course"
+              title="Tất cả khóa học"
               to="/admin/all-courses"
               icon={<OndemandVideoOutlinedIcon />}
               selected={selected}
@@ -292,7 +292,7 @@ const AdminSidebar = () => {
               setSelected={handleMenuItemClick}
             />
             <Item
-              title="Categories"
+              title="Danh mục"
               to="/admin/categories"
               icon={<WysiwygOutlinedIcon />}
               selected={selected}
@@ -306,7 +306,7 @@ const AdminSidebar = () => {
               {!isCollapsed && "Manage Team"}
             </Typography>
             <Item
-              title="Manage Team"
+              title="Quản lý Team"
               to="/admin/manage-team"
               icon={<GroupsOutlinedIcon />}
               selected={selected}
@@ -320,21 +320,21 @@ const AdminSidebar = () => {
               {!isCollapsed && "Analytics"}
             </Typography>
             <Item
-              title="Course analytics"
+              title="Thống kê khóa học"
               to="/admin/course-analytics"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={handleMenuItemClick}
             />
             <Item
-              title="Order analytics"
+              title="Thống kê đăng ký khóa học"
               to="/admin/order-analytics"
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={handleMenuItemClick}
             />
             <Item
-              title="User analytics"
+              title="Thống kê người dùng"
               to="/admin/user-analytics"
               icon={<ManageHistoryRoundedIcon />}
               selected={selected}
@@ -348,7 +348,7 @@ const AdminSidebar = () => {
               {!isCollapsed && "Extras"}
             </Typography>
             <Item
-              title="Setting"
+              title="Cài đặt"
               to="/admin/setttings"
               icon={<SettingsOutlinedIcon />}
               selected={selected}
@@ -356,7 +356,7 @@ const AdminSidebar = () => {
             />
             <div onClick={handleLogout}>
               <Item
-                title="Logout"
+                title="Đăng xuất"
                 to="/admin/logout"
                 icon={<ExitToAppOutlinedIcon />}
                 selected={selected}

@@ -37,7 +37,7 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
   });
   useEffect(() => {
    if(isSuccess){
-    toast.success("Login successfull !");
+    toast.success("Đăng nhập thành công !");
     setOpen(false);
    }
    if(error){
@@ -54,7 +54,7 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
       <h1 className={`${styles.title} mb-10`}>Login to TP - Elearning</h1>
       <form onSubmit={handleSubmit}>
         <label className={`${styles.label}`} htmlFor="email">
-          Enter your email
+          Địa chỉ Email
         </label>
         <input
           type="email"
@@ -71,7 +71,7 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
         )}
         <div className="w-full mt-5 relative">
           <label className={`${styles.label}`} htmlFor="password">
-            Enter your password
+            Mật khẩu
           </label>
           <input
             type={show ? "text" : "password"}
@@ -79,7 +79,7 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
             value={values.password}
             onChange={handleChange}
             id="password"
-            placeholder="Enter your password...."
+            placeholder="Nhập mật khẩu...."
             className={`${
               errors.password && touched.password && "border-red-500"
             } w-full text-black dark:text-white bg-transparent border rounded-lg mt-4 px-2 py-3 font-Popins`}
@@ -102,10 +102,14 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
           <span className="text-red-500 pt-2 block">{errors.password}</span>
         )}
         <div className="mb-6">
-          <input type="submit" value="Login" className={`${styles.button}`} />
+          <input
+            type="submit"
+            value="Đăng nhập"
+            className={`${styles.button}`}
+          />
         </div>
         <div className="text-center font-Popins text-[20px] text-black dark:text-white">
-          Or
+          Hoặc
         </div>
         <div className="flex items-center justify-center my-3 p-2">
           <AiOutlineGoogle
@@ -121,12 +125,12 @@ const Login: FC<Props> = ({ setRoute, setOpen }) => {
           />
         </div>
         <h5 className="text-center text-black dark:text-white pt-4 font-Popins text-[15px]">
-          No have account ?{" "}
+          Chưa có tài khoản ?{" "}
           <span
             onClick={() => setRoute("Sign-up")}
             className="text-[#4548e2] cursor-pointer ml-4"
           >
-            Sign up
+            Đăng ký
           </span>
         </h5>
       </form>

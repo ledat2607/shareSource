@@ -53,7 +53,7 @@ const CourseData: React.FC<Props> = ({
     <div className="w-[90%] 800px:w-[80%] mx-auto 800px:mt-24 mt-16">
       <div className="w-full">
         <label className={`${styles.label} text-[20px]`} htmlFor="email">
-          What are the benifits for student in this course?
+          Lợi ích khi học viên tham gia khóa học
         </label>
 
         {benefit?.map((benifit: any, index: number) => (
@@ -78,7 +78,7 @@ const CourseData: React.FC<Props> = ({
 
       <div className="w-full">
         <label className={`${styles.label} text-[20px]`} htmlFor="email">
-          What are the prerequisites for starting this course?
+          Học viên cần chuẩn bị gì trước khi tham gia khóa học
         </label>
 
         {prerequisites?.map((prerequisites: any, index: number) => (

@@ -53,13 +53,13 @@ const AllUser: React.FC<Props> = ({ isTeam }) => {
   };
   let columns: GridColDef[] = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "name", headerName: "User name", flex: 0.4 },
+    { field: "name", headerName: "Tên người dùng", flex: 0.4 },
     { field: "email", headerName: "Email", flex: 0.5 },
-    { field: "birthDay", headerName: "BirthDay", flex: 0.3 },
-    { field: "created_at", headerName: "Created at", flex: 0.5 },
+    { field: "birthDay", headerName: "Ngày sinh", flex: 0.3 },
+    { field: "created_at", headerName: "Ngày tạo", flex: 0.5 },
     {
       field: "delete",
-      headerName: "Delete",
+      headerName: "Xóa",
       flex: 0.2,
       renderCell: (params: any) => (
         <Button>
@@ -73,7 +73,7 @@ const AllUser: React.FC<Props> = ({ isTeam }) => {
     },
     {
       field: "sendEmail",
-      headerName: "Email",
+      headerName: "Gửi Email",
       flex: 0.2,
       renderCell: (params: any) => (
         <Button>
@@ -86,9 +86,9 @@ const AllUser: React.FC<Props> = ({ isTeam }) => {
   ];
 
   if (isTeam) {
-    columns.splice(4, 0, { field: "role", headerName: "Role", flex: 0.3 });
+    columns.splice(4, 0, { field: "role", headerName: "Phân quyền", flex: 0.3 });
   } else {
-    columns.splice(4, 0, { field: "course", headerName: "Purchased", flex: 0.3 });
+    columns.splice(4, 0, { field: "course", headerName: "Thanh toán", flex: 0.3 });
   }
 
   const rows: any = [];

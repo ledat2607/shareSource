@@ -59,7 +59,7 @@ const discountPercent =
       </div>
       <div className="flex items-center">
         <div className="w-[180px] my-3 font-Popins bg-[crimson] cursor-not-allowed rounded-full py-3 flex items-center justify-center text-[18px] text-white">
-          Buy now {courseContent?.price} $
+          Mua ngay {courseContent?.price} $
         </div>
       </div>
       <div className="flex items-center">
@@ -71,7 +71,7 @@ const discountPercent =
           className="w-[70%] mt-5 bg-gray-200/80 dark:bg-slate-800 px-3 py-3 text-black dark:text-white outline-none rounded-2xl"
         />
         <div className="w-[150px] mt-5 rounded-2xl hover:translate-x-4 bg-gray-200/80 transition-all duration-500 cursor-pointer ml-3 px-3 py-3 dark:bg-slate-800 text-black dark:text-white flex justify-center items-center">
-          Apply now
+          Áp dụng
         </div>
       </div>
       <div className="w-[80%] flex items-center justify-between">
@@ -80,28 +80,28 @@ const discountPercent =
             size={25}
             className="mr-3 text-black dark:text-white"
           />
-          Source code included
+          Bao gồm mã nguồn
         </p>
         <p className="pb-1 800px:mt-4 flex items-center text-black dark:text-white">
           <IoCheckmarkDone
             size={25}
             className="mr-3 text-black dark:text-white"
           />
-          Full lifetime access
+          Truy cập không giới hạn
         </p>
         <p className="pb-1 800px:mt-4 flex items-center text-black dark:text-white">
           <IoCheckmarkDone
             size={25}
             className="mr-3 text-black dark:text-white"
           />
-          Certificate of completion
+          Chứng chỉ hoàn thành
         </p>
         <p className="pb-1 800px:mt-4 flex items-center text-black dark:text-white">
           <IoCheckmarkDone
             size={25}
             className="mr-3 text-black dark:text-white"
           />
-          Premium Support
+          Hỗ trợ 24/24
         </p>
       </div>
       <div className="w-[90%] ">
@@ -113,15 +113,15 @@ const discountPercent =
             <div className="flex items-center">
               <Rating rating={0} />
               <h5 className="text-black dark:text-white font-Josefin text-[18px]">
-                0 Reviews
+                0 đánh giá
               </h5>
             </div>
             <h5 className="text-black dark:text-white font-Josefin text-[18px]">
-              0 Student
+              0 học viên
             </h5>
           </div>
           <h1 className="text-[25px] text-black dark:text-green-500 mt-4 font-[600] font-Josefin">
-            What you will learn from this course ?
+            Bạn sẽ học được gì từ khóa học ?
           </h1>
           {courseContent?.benefits?.map((item: any, index: number) => (
             <div className="w-full flex 800px:items-center py-2" key={index}>
@@ -135,7 +135,7 @@ const discountPercent =
             </div>
           ))}
           <h1 className="text-[25px] text-black dark:text-green-500 mt-4 font-[600] font-Josefin">
-            What are the prerequitesites for starting this course ?
+            Bạn cần chuẩn bị gì khi tham gia khóa học ?
           </h1>
           {courseContent?.prerequisites?.map((item: any, index: number) => (
             <div className="w-full flex 800px:items-center py-2" key={index}>
@@ -150,7 +150,7 @@ const discountPercent =
           ))}
           <div className="w-full">
             <h1 className="text-[25px] font-[600] text-black mt-4 dark:text-green-500">
-              Course Details
+              Chi tiết khóa học
             </h1>
             <p className="text-black text-[20px] dark:text-white font-Josefin">
               {courseContent.description}
@@ -163,21 +163,21 @@ const discountPercent =
           className="w-[150px] h-[40px] flex items-center justify-center hover:border hover:bg-white hover:border-blue-500 hover:-translate-x-4 transition-all duration-500 bg-[#37a39a] hover:text-[#37a39a] cursor-pointer rounded-full text-white"
           onClick={() => PrevButton()}
         >
-          Previous
+          Quay lại
         </div>
         {type === "create" ? (
           <div
             className="w-[150px] h-[40px] flex items-center justify-center hover:border hover:bg-white hover:border-blue-500 hover:translate-x-4 transition-all duration-500 bg-[#37a39a] hover:text-[#37a39a] cursor-pointer rounded-full text-white"
             onClick={() => CreateCourse()}
           >
-            Create course
+            Tạo
           </div>
         ) : (
           <div
             className="w-[150px] h-[40px] flex items-center justify-center hover:border hover:bg-white hover:border-blue-500 hover:translate-x-4 transition-all duration-500 bg-[#37a39a] hover:text-[#37a39a] cursor-pointer rounded-full text-white"
             onClick={() => CreateCourse()}
           >
-            Edit course
+            Chỉnh sửa
           </div>
         )}
       </div>

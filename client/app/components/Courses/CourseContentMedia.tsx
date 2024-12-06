@@ -149,7 +149,7 @@ const CourseContentMedia = ({
           }
         >
           <AiOutlineArrowLeft className="mr-2" />
-          Prev Lession
+          Quay lại
         </div>
         <div
           className={`px-8 flex text-white items-center py-3 bg-blue-500 cursor-pointer rounded-2xl ${
@@ -163,7 +163,7 @@ const CourseContentMedia = ({
             )
           }
         >
-          Next Lession
+          Tiếp theo
           <AiOutlineArrowRight className="ml-2" />
         </div>
       </div>
@@ -172,7 +172,7 @@ const CourseContentMedia = ({
       </h1>
       <br />
       <div className="w-full p-4 flex items-center justify-between bg-slate-600 bg-opacity-20 backdrop-blur rounded-none shadow-inner">
-        {["Overview", "Resources", "Q&A", "Review"].map((item, index) => (
+        {["Tổng quan", "Mã Nguồn", "Q&A", "Đánh giá"].map((item, index) => (
           <h1
             key={index}
             className={`800px:text-[20px] cursor-pointer ${
@@ -197,10 +197,10 @@ const CourseContentMedia = ({
           {data[activeVideo]?.links.map((item: any, index: any) => (
             <div key={index} className="mb-2 flex flex-col">
               <h2 className="800px:text-[20px] 800px:inline-block text-black dark:text-white">
-                Source Title: {item.title && item.title + " "}
+                Tiêu đề mã nguồn: {item.title && item.title + " "}
               </h2>
               <p className="text-black dark:text-white 800px:text-[20px]">
-                Link source:
+                Liên kết mã nguồn:
                 <a
                   href={item.url}
                   className="inline-block text-[#4395c4] 800px:text-[20px] 800px:pl-2"
@@ -230,7 +230,7 @@ const CourseContentMedia = ({
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               className=" text-black dark:text-white bg-transparent ml-3 !bg-gray-200 dark:!bg-transparent border border-[#ffffff37] 800px:w-full p-2 rounded-2xl w-[95%] 800px:text-[18px] font-Popins"
-              placeholder="Write your question..."
+              placeholder="Hãy viết câu hỏi của bạn...."
               rows={5}
               color="40"
             />
@@ -242,7 +242,7 @@ const CourseContentMedia = ({
               }`}
               onClick={questionCreating ? () => {} : handleAddQuestion}
             >
-              Submit
+              Gửi
             </div>
           </div>
           <br />
@@ -369,8 +369,8 @@ const CourseContentMedia = ({
                       {reivewreplyActive === item._id
                         ? "Hide review"
                         : item.comentReplies.length !== 0
-                        ? "All Review"
-                        : "Add Reply"}
+                        ? "Tất cả đánh giá"
+                        : "Thêm đánh giá"}
                     </span>
                     <div className="min-w-[100px] flex items-center">
                       <BiMessage
@@ -421,7 +421,7 @@ const CourseContentMedia = ({
                       <div className="w-full flex relative">
                         <input
                           type="text"
-                          placeholder="Enter your reply..."
+                          placeholder="Cho biết trả lời của bạn....."
                           onChange={(e) => setReviewRep(e.target.value)}
                           value={reviewRep}
                           className="block text-black dark:text-white 800px:ml-12 mt-2 outline-none bg-transparent border-b border-[#fff] p-[5px] w-[95%]"
@@ -434,7 +434,7 @@ const CourseContentMedia = ({
                             reviewRep.trim() === "" && "cursor-no-drop"
                           }`}
                         >
-                          Submit
+                          Gửi
                         </button>
                       </div>
                     </div>

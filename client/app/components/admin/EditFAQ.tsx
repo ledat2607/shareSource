@@ -107,7 +107,7 @@ const EditFAQ = (props: Props) => {
                         onChange={(e: any) =>
                           handleChangeQuestion(q._id, e.target.value)
                         }
-                        placeholder="Add your question...."
+                        placeholder="Thêm câu hỏi...."
                       />
                       <span className="ml-6 flex-shrink-0">
                         {q.active ? (
@@ -125,7 +125,7 @@ const EditFAQ = (props: Props) => {
                         onChange={(e: any) =>
                           handleChangeAnwser(q._id, e.target.value)
                         }
-                        placeholder="Add your answer"
+                        placeholder="Thêm câu trả lời"
                         className="border-none rounded-2xl w-full p-2 dark:bg-slate-800 bg-gray-300 text-black dark:text-white"
                       />
                       <span className="ml-6 flex-shrink-0">

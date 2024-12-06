@@ -7,19 +7,19 @@ type Props = {
 };
 export const navItemsData = [
   {
-    name: "Home",
+    name: "Trang chủ",
     url: "/",
   },
   {
-    name: "Courses",
+    name: "Khóa học",
     url: "/courses",
   },
   {
-    name: "About",
+    name: "Giới thiệu",
     url: "/about",
   },
   {
-    name: "Contact Us",
+    name: "Liên hệ",
     url: "/contact",
   },
 ];

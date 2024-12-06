@@ -137,7 +137,8 @@ const CourseContent: React.FC<Props> = ({
       <form onSubmit={handleSubmit}>
         {courseContentData?.map((item: any, index: number) => {
           const showSection =
-            index === 0 || item.videoSection !== courseContentData[index - 1].videoSection;
+            index === 0 ||
+            item.videoSection !== courseContentData[index - 1].videoSection;
           return (
             <div
               key={index}
@@ -214,7 +215,7 @@ const CourseContent: React.FC<Props> = ({
                     exit="hidden"
                     className="my-3 flex 1100px:flex-row flex-col justify-between"
                   >
-                    <label className={`${styles.label}`}>Video title</label>
+                    <label className={`${styles.label}`}>Tiêu đề video</label>
                     <input
                       type="text"
                       value={item.title}
@@ -234,7 +235,9 @@ const CourseContent: React.FC<Props> = ({
                     exit="hidden"
                     className="my-3 flex 1100px:flex-row flex-col justify-between"
                   >
-                    <label className={`${styles.label}`}>Video url</label>
+                    <label className={`${styles.label}`}>
+                      Đường link video
+                    </label>
                     <input
                       type="text"
                       value={item.videoUrl}
@@ -246,7 +249,7 @@ const CourseContent: React.FC<Props> = ({
                         };
                         setCourseContentData(updateData);
                       }}
-                      placeholder="Video url..."
+                      placeholder="Đường link video..."
                       className="px-3 py-3 rounded-xl outline-none p-2 800px:w-[80%] w-[100%] bg-gray-200/80 dark:bg-slate-800 text-black dark:text-white font-Josefin"
                     />
                   </motion.div>
@@ -257,7 +260,7 @@ const CourseContent: React.FC<Props> = ({
                     exit="hidden"
                     className="my-3 flex 1100px:flex-row flex-col justify-between"
                   >
-                    <label className={`${styles.label}`}>Video Length</label>
+                    <label className={`${styles.label}`}>Độ dài Video</label>
                     <input
                       type="text"
                       value={item.videoLength}
@@ -280,9 +283,7 @@ const CourseContent: React.FC<Props> = ({
                     exit="hidden"
                     className="my-3 flex 1100px:flex-row flex-col justify-between"
                   >
-                    <label className={`${styles.label}`}>
-                      Video Description
-                    </label>
+                    <label className={`${styles.label}`}>Mô tả Video</label>
                     <textarea
                       cols={30}
                       rows={8}
@@ -339,8 +340,11 @@ const CourseContent: React.FC<Props> = ({
                             const updateData = [...courseContentData];
                             updateData[index] = {
                               ...updateData[index],
-                              links: updateData[index].links.map((linkItem:any, i:number) =>
-                                i === linkIndex ? { ...linkItem, title: e.target.value } : linkItem
+                              links: updateData[index].links.map(
+                                (linkItem: any, i: number) =>
+                                  i === linkIndex
+                                    ? { ...linkItem, title: e.target.value }
+                                    : linkItem
                               ),
                             };
                             setCourseContentData(updateData);
@@ -355,8 +359,11 @@ const CourseContent: React.FC<Props> = ({
                             const updateData = [...courseContentData];
                             updateData[index] = {
                               ...updateData[index],
-                              links: updateData[index].links.map((linkItem:any, i:number) =>
-                                i === linkIndex ? { ...linkItem, url: e.target.value } : linkItem
+                              links: updateData[index].links.map(
+                                (linkItem: any, i: number) =>
+                                  i === linkIndex
+                                    ? { ...linkItem, url: e.target.value }
+                                    : linkItem
                               ),
                             };
                             setCourseContentData(updateData);
@@ -387,7 +394,7 @@ const CourseContent: React.FC<Props> = ({
                     onClick={() => newContentHandled(item)}
                     className="flex items-center text-[18px] dark:text-white text-black cursor-pointer"
                   >
-                    <AiOutlinePlusCircle className="mr-2" /> Add new content
+                    <AiOutlinePlusCircle className="mr-2" /> Thêm nội dung mới
                   </p>
                 </div>
               )}
@@ -398,20 +405,20 @@ const CourseContent: React.FC<Props> = ({
           onClick={addSection}
           className="flex items-center text-[20px] dark:text-white text-black cursor-pointer"
         >
-          <AiOutlinePlusCircle className="mr-2" /> Add new section
+          <AiOutlinePlusCircle className="mr-2" /> Thêm phần mới
         </div>
         <div className="w-full flex items-center justify-between mt-5">
           <div
             onClick={PrevButton}
             className="w-[150px] h-[40px] flex items-center justify-center hover:border hover:bg-white hover:border-blue-500 hover:-translate-x-4 transition-all duration-500 bg-[#37a39a] hover:text-[#37a39a] cursor-pointer rounded-full text-white"
           >
-            Previous
+            Quay lại
           </div>
           <div
             onClick={NextButton}
             className="w-[150px] h-[40px] flex items-center justify-center hover:border hover:bg-white hover:border-blue-500 hover:translate-x-4 transition-all duration-500 bg-[#37a39a] hover:text-[#37a39a] cursor-pointer rounded-full text-white"
           >
-            Next
+            Tiếp tục
           </div>
         </div>
       </form>

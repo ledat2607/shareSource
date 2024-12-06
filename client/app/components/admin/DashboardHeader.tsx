@@ -23,15 +23,15 @@ const DashboardHeader: React.FC<Props> = ({ open, setOpen }) => {
       {open && (
         <div className="800px:w-[450px] w-[75%] h-[90vh] dark:bg-[#111c43] p-3 bg-gray-300 shadow-xl absolute top-16 800px:z-[100] rounded-xl">
           <h5 className="text-center text-[20px] font-Popins text-black dark:text-white p-3 font-[700] z-[100]">
-            Notifications
+            Thông báo
           </h5>
           <div className="dark:bg-[#2d3a4ea1] bg-teal-300 rounded-2xl p-3 font-Popins border dark:border-[#000000c1] border-b-[#0000002c]">
             <div className="w-full flex items-center justify-between p-2">
               <p className="text-black font-[700] 800px:text-[18px] text-[14px] dark:text-white">
-                New question received
+                Thông báo mới
               </p>
               <p className="text-black 800px:text-[12px] text-[10px] dark:text-white cursor-pointer">
-                Mark as read
+                Đánh dấu là đã đọc
               </p>
             </div>
             <p className="px-2 800px:text-[15px] text-[12px] text-black dark:text-white">
@@ -39,16 +39,16 @@ const DashboardHeader: React.FC<Props> = ({ open, setOpen }) => {
               quasi harum nesciunt facilis ea sed, tempore similique, delectus ?
             </p>
             <p className="px-2 800px:text-[15px] text-[12px] text-black dark:text-white">
-              5 day ago
+              1 ngày trước
             </p>
           </div>
           <div className="dark:bg-[#2d3a4ea1] bg-teal-300 rounded-2xl mt-3 p-3 font-Popins border dark:border-[#000000c1] border-b-[#0000002c]">
             <div className="w-full flex items-center justify-between p-2">
               <p className="text-black font-[700] 800px:text-[18px] text-[14px] dark:text-white">
-                New order received
+                Thông báo mới
               </p>
               <p className="text-black 800px:text-[12px] text-[10px] dark:text-white cursor-pointer">
-                Mark as read
+                Đánh dấu là đã đọc
               </p>
             </div>
             <p className="px-2 800px:text-[15px] text-[12px] text-black dark:text-white">
@@ -56,7 +56,7 @@ const DashboardHeader: React.FC<Props> = ({ open, setOpen }) => {
               quasi harum nesciunt facilis ea sed, tempore similique, delectus ?
             </p>
             <p className="px-2 800px:text-[15px] text-[12px] text-black dark:text-white">
-              5 day ago
+              5 ngày trước
             </p>
           </div>
         </div>

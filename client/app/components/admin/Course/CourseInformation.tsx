@@ -69,7 +69,7 @@ const CourseInformation: React.FC<Props> = ({
             htmlFor=""
             className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
           >
-            Course name
+            Tên khóa học
           </label>
           <input
             type="name"
@@ -80,7 +80,7 @@ const CourseInformation: React.FC<Props> = ({
               setCourseInfo({ ...courseInfo, name: e.target.value })
             }
             id="name"
-            placeholder="Course name...."
+            placeholder="Tên khóa học...."
             className={`mt-2 w-full px-3 py-3 rounded-2xl bg-gray-200/80 dark:bg-gray-800 text-black dark:text-white `}
           />
         </div>
@@ -89,14 +89,14 @@ const CourseInformation: React.FC<Props> = ({
             htmlFor=""
             className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
           >
-            Course Description
+            Mô tả
           </label>
           <textarea
             cols={20}
             rows={10}
             name=""
             id=""
-            placeholder="Write something amazing about this course..."
+            placeholder="Viết một vài mô tả về khóa học..."
             className="p-2 text-black dark:text-white bg-gray-200/80 dark:bg-gray-800 rounded-2xl mt-2"
             value={courseInfo.descriptions}
             onChange={(e: any) =>
@@ -110,7 +110,7 @@ const CourseInformation: React.FC<Props> = ({
               htmlFor=""
               className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
             >
-              Course Price
+              Phí
             </label>
             <input
               type="number"
@@ -129,7 +129,7 @@ const CourseInformation: React.FC<Props> = ({
               htmlFor=""
               className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
             >
-              Course Estimated Price
+              Phí (Đã giảm)
             </label>
             <input
               type="number"
@@ -150,7 +150,7 @@ const CourseInformation: React.FC<Props> = ({
               htmlFor=""
               className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
             >
-              Course Tags
+              Các tag liên quan
             </label>
             <input
               type="text"
@@ -161,7 +161,7 @@ const CourseInformation: React.FC<Props> = ({
                 setCourseInfo({ ...courseInfo, tags: e.target.value })
               }
               id="tags"
-              placeholder="Course tags...."
+              placeholder="Tag liên quan...."
               className={`mt-2 w-full px-3 py-3 rounded-2xl bg-gray-200/80 dark:bg-gray-800 text-black dark:text-white `}
             />
           </div>
@@ -170,7 +170,7 @@ const CourseInformation: React.FC<Props> = ({
               htmlFor=""
               className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
             >
-              Course Categories
+              Danh mục
             </label>
             <select
               value={courseInfo.categories}
@@ -197,7 +197,7 @@ const CourseInformation: React.FC<Props> = ({
               htmlFor=""
               className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
             >
-              Course Level
+              Độ khó
             </label>
             <input
               type="text"
@@ -208,7 +208,7 @@ const CourseInformation: React.FC<Props> = ({
                 setCourseInfo({ ...courseInfo, level: e.target.value })
               }
               id="name"
-              placeholder="Course level...."
+              placeholder="Độ khó...."
               className={`mt-2 w-full px-3 py-3 rounded-2xl bg-gray-200/80 dark:bg-gray-800 text-black dark:text-white `}
             />
           </div>
@@ -217,7 +217,7 @@ const CourseInformation: React.FC<Props> = ({
               htmlFor=""
               className={`${styles.label} !text-[13px] 800px:!text-[18px]`}
             >
-              Course Demo link
+              Link demo
             </label>
             <input
               type="text"
@@ -228,7 +228,7 @@ const CourseInformation: React.FC<Props> = ({
                 setCourseInfo({ ...courseInfo, demoUrl: e.target.value })
               }
               id=""
-              placeholder="Course demo link...."
+              placeholder="Link demo...."
               className={`mt-2 w-full px-3 py-3 rounded-2xl bg-gray-200/80 dark:bg-gray-800 text-black dark:text-white `}
             />
           </div>
@@ -271,7 +271,7 @@ const CourseInformation: React.FC<Props> = ({
           onClick={handleSubmit}
           className="1100px:mb-10 800px:w-[20%] w-[45%] hover:w-[25%] cursor-pointer hover:bg-white hover:border-blue-500 hover:border bg-[#37a39a] hover:text-blue-500 transition-all duration-500 hover:dark:text-gray-100 hover:dark:bg-gray-800 rounded-2xl px-2 py-3 mt-[5%] flex items-center justify-center m-auto"
         >
-          Next Steps
+          Tiếp theo
         </div>
       </form>
     </div>

@@ -46,7 +46,7 @@ const SidebarProfile: React.FC<Props> = ({
               : "text-black dark:text-gray-400"
           }`}
         >
-          My account
+          Tài khoản của tôi
         </h5>
       </div>
       <div
@@ -66,7 +66,7 @@ const SidebarProfile: React.FC<Props> = ({
           }`}
         >
           {" "}
-          Change password
+          Đổi mật khẩu
         </h5>
       </div>
       <div
@@ -86,29 +86,10 @@ const SidebarProfile: React.FC<Props> = ({
           }`}
         >
           {" "}
-          Errolled Courses
+          Các khóa học đã tham gia
         </h5>
       </div>
-      <div
-        className={`w-full mt-2 overflow-hidden hover:dark:bg-slate-500 hover:bg-blue-400 hover:rounded-3xl hover:scale-105 duration-300 flex items-center justify-center 800px:justify-start px-3 py-4 cursor-pointer rounded-xl ${
-          active === 4
-            ? "dark:bg-slate-800 bg-slate-400 shadow-2xl"
-            : "bg-transparent "
-        } `}
-        onClick={() => setActice(4)}
-      >
-        <AiOutlinePayCircle size={20} className="text-black dark:text-white" />
-        <h5
-          className={`pl-8 800px:block hidden text-[17px] font-Popins dark:text-gray-400 ${
-            active === 4
-              ? "text-white dark:text-gray-100 font-[700]"
-              : "text-black dark:text-gray-400"
-          }`}
-        >
-          {" "}
-          Payment methods
-        </h5>
-      </div>
+
       {user?.role === "admin" ? (
         <Link href={"/admin"}>
           <div
@@ -128,7 +109,7 @@ const SidebarProfile: React.FC<Props> = ({
               }`}
             >
               {" "}
-              Admin Panel
+              Giao diện quản lý
             </h5>
           </div>
         </Link>
@@ -142,7 +123,7 @@ const SidebarProfile: React.FC<Props> = ({
       >
         <BiLogOutCircle size={20} className="text-black dark:text-white" />
         <h5 className="pl-8 800px:block hidden text-[17px] font-Popins dark:text-white text-black">
-          Log out
+          Đăng xuất
         </h5>
       </div>
     </div>

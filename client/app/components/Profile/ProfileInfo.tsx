@@ -54,7 +54,13 @@ const ProfileInfo: React.FC<Props> = ({ avatar, user }) => {
         birthDay: birthDay,
       });
     }
+    if (email !== "") {
+      await editProfile({
+        email: email,
+      });
+    }
   };
+  console.log(email);
   const closeModal = () => {
     setShowModal(false);
     setModalImage(undefined);
@@ -108,7 +114,7 @@ const ProfileInfo: React.FC<Props> = ({ avatar, user }) => {
       </div>
       <div className="800px:w-[50%] w-[90%] mx-auto flex flex-col">
         <label className="text-black dark:text-white font-Popins text-[20px]">
-          Full name
+          Họ và tên
         </label>
         <input
           type="text"
@@ -119,7 +125,7 @@ const ProfileInfo: React.FC<Props> = ({ avatar, user }) => {
       </div>
       <div className="800px:w-[50%] w-[90%] mt-3 mx-auto flex flex-col">
         <label className="text-black dark:text-white font-Popins text-[20px]">
-          Email
+          Địa chỉ email
         </label>
         <input
           type="text"
@@ -130,7 +136,7 @@ const ProfileInfo: React.FC<Props> = ({ avatar, user }) => {
       </div>
       <div className="800px:w-[50%] w-[90%] mt-3 mx-auto flex flex-col">
         <label className="text-black dark:text-white font-Popins text-[20px]">
-          BirthDay
+          Ngày sinh
         </label>
         <input
           type="date"
@@ -142,7 +148,7 @@ const ProfileInfo: React.FC<Props> = ({ avatar, user }) => {
       <input
         onClick={handleSubmit}
         type="submit"
-        value="Update"
+        value="Cập nhật"
         className="px-7 py-4 bg-slate-400 hover:bg-blue-500 hover:text-white transition-all duration-500 dark:bg-slate-800 rounded-2xl mt-9 cursor-pointer text-[20px] font-Josefin font-[600] text-white hover:px-12"
       />
 

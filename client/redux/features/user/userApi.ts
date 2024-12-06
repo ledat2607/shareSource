@@ -11,10 +11,10 @@ export const userApi = apiSlide.injectEndpoints({
       }),
     }),
     editProfile: builder.mutation({
-      query: ({ name, birthDay }) => ({
+      query: ({ name, birthDay, email }) => ({
         url: "update-user-info",
         method: "PUT",
-        body: { name, birthDay },
+        body: { name, birthDay, email },
         credentials: "include" as const,
       }),
     }),

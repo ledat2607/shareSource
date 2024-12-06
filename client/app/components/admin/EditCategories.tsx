@@ -74,7 +74,7 @@ const EditCategories = (props: Props) => {
         <Loader />
       ) : (
         <div className="text-center">
-          <h1 className={`${styles.title}`}>All Categories</h1>
+          <h1 className={`${styles.title}`}>Tất cả danh mục</h1>
           {categories &&
             categories.map((cat: any, index: number) => {
               return (
@@ -122,7 +122,7 @@ const EditCategories = (props: Props) => {
                 : handleEditCategories
             }
           >
-            Save
+            Lưu
           </div>
         </div>
       )}

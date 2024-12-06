@@ -278,7 +278,8 @@ interface IUpdateUserInfo {
 export const updateUserInfo = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { name, birthDay } = req.body as IUpdateUserInfo;
+      const { name, birthDay, email } = req.body as IUpdateUserInfo;
+      console.log(req.body);
       const userId = (req as any).user?._id;
       const user = await userModel.findById(userId);
 
@@ -287,6 +288,9 @@ export const updateUserInfo = CatchAsyncError(
       }
       if (birthDay && user) {
         user.birthDay = birthDay;
+      }
+      if (email && user) {
+        user.email = email;
       }
       await user?.save();
 

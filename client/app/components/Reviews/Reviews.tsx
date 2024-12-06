@@ -52,7 +52,7 @@ const Reviews = (props: Props) => {
   return (
     <div className="w-[90%] 800px:w-[85%] m-auto mt-10">
       <h1 className="text-center text-black dark:text-white 800px:text-[50px] font-Popins font-[700]">
-        Reviews
+        Đánh giá
       </h1>
       <div className="w-full 800px:flex items-center">
         <div className="800px:w-[50%] w-full">
@@ -60,11 +60,11 @@ const Reviews = (props: Props) => {
         </div>
         <div className="800px:w-[50%] w-full">
           <h3 className="text-center text-black dark:text-white font-Popins text-[25px] leading-3 sm:text-4xl 800px:!leading-[60px] font-[700]">
-            Our Student Are
-            <span className="text-gradient"> Our Strength </span>
-            <span className='mt-6'>
+            Sự phát triển của học viên là
+            <span className="text-gradient"> Sức mạnh </span>
+            <span className="mt-6">
               <span className="gradient-text">
-                See What They Say About Us ?
+                Xem họ đã có những đánh giá gì
               </span>
             </span>
           </h3>

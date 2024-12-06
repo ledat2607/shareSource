@@ -16,10 +16,10 @@ const Courses = (props: Props) => {
     <div className="mt-40">
       <div className={`w-[90%] 800px:w-[80%] m-auto`}>
         <h1 className="text-center text-black dark:text-white font-Popins text-[25px] leading-3 sm:text-4xl 800px:!leading-[60px] font-[700]">
-          Expand your Career
-          <span className="text-gradient"> Opportunity</span>
+          Phát triển kỹ năng
+          <span className="text-gradient ml-2">tạo thêm cơ hội</span>
           <br />
-          <span className="gradient-text">Opportunity with our Courses</span>
+          <span className="gradient-text">Các cơ hội đến từ các khóa học</span>
         </h1>
         <div className="grid grid-cols-1 mt-10 gap-[20px] md:grid-cols-2 md:gap-[15px] lg:grid-cols-3 lg:gap-[25px] 1500px:grid-cols-4 1500px:gap-[35px] 800px:ml-12 ml-0 border-0">
           {courseData &&

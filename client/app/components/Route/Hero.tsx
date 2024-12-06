@@ -35,14 +35,12 @@ const Hero: FC<Props> = (props) => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="relative rounded-full border-gradient-animation"
+              className="relative rounded-full border-gradient-animation w-[60%] flex items-center justify-center"
             >
               <img
-                width={500}
-                height={500}
                 src={data?.layoutData.banner.image.url}
                 alt=""
-                className="object-cover rounded-full 1000px:w-[500px] 1000px:h-[500px] w-full h-[170px]"
+                className="object-cover rounded-full w-full h-full"
               />
             </motion.div>
           </div>
@@ -78,13 +76,13 @@ const Hero: FC<Props> = (props) => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full focus:ring-2 bg-gray-300 border-black focus:py-5 focus:ring-blue-500 focus:border-0 dark:border-white h-[40px] rounded-2xl px-3 py-5 dark:text-white text-black focus:outline-none border-2 border-transparent transition-colors duration-300"
-                placeholder="Search here..."
+                placeholder="Tìm kiếm..."
               />
               <div
                 onClick={handelSearch}
                 className="w-[150px] h-[40px] cursor-pointer dark:text-black text-white duration-300 hover:translate-x-3 dark:bg-white bg-gray-500 ml-6 rounded-2xl flex items-center justify-center"
               >
-                <p>Search</p>
+                <p>Tìm kiếm</p>
                 <BsArrowRight className="ml-2" />
               </div>
             </motion.div>
@@ -94,7 +92,7 @@ const Hero: FC<Props> = (props) => {
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="mt-6 1500px:w-[55%] 1100px:w-[78%] w-[90%] flex items-center"
+              className="mt-6 1500px:w-[75%] 1100px:w-[78%] w-[90%] flex items-center"
             >
               <Image
                 src={require("../../../public/assets/img1.jpg")}
@@ -112,13 +110,13 @@ const Hero: FC<Props> = (props) => {
                 className="w-[50px] h-[50px] rounded-full -ml-[20px] object-cover"
               />
               <p className="font-Josefin dark:text-[#62c559] 800px:text-[20px] text-[12px] text-black pl-4">
-                100K+ People trust us.
+                Hơn 5k+ người đã đăng ký tham gia.
               </p>
               <Link
                 href={"/courses"}
                 className="dark:text-[#62c559] ml-4 cursor-pointer  flex items-center hover:translate-x-4 duration-300 hover:dark:text-white hover:text-red-500"
               >
-                <p className="hidden 800px:block"> View all courses</p>
+                <p className="hidden 800px:block">Xem tất cả khóa học</p>
                 <BsArrowRight className="ml-2" title="View all courses" />
               </Link>
             </motion.div>

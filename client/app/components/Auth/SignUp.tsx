@@ -74,10 +74,10 @@ const SignUp: FC<Props> = ({ setRoute }) => {
   const { errors, touched, values, handleChange, handleSubmit } = formik;
   return (
     <div className="w-full">
-      <h1 className={`${styles.title} mb-10`}>Join TP - Elearning</h1>
+      <h1 className={`${styles.title} mb-10`}>Tham gia TP - Elearning</h1>
       <form onSubmit={handleSubmit}>
         <label className={`${styles.label}`} htmlFor="name">
-          Enter your full name
+          Họ và tên
         </label>
         <input
           type="text"
@@ -92,8 +92,8 @@ const SignUp: FC<Props> = ({ setRoute }) => {
         {errors.name && touched.name && (
           <span className="text-red-500 pt-2 block">{errors.name}</span>
         )}
-        <label className={`${styles.label}`} htmlFor="email">
-          Enter your email
+        <label className={`${styles.label} !mt-2`} htmlFor="email">
+          Địa chỉ email
         </label>
         <input
           type="email"
@@ -110,7 +110,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
         )}
         <div className="w-full mt-5 relative">
           <label className={`${styles.label}`} htmlFor="password">
-            Enter your password
+            Nhập mật khẩu
           </label>
           <input
             type={show ? "text" : "password"}
@@ -118,7 +118,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
             value={values.password}
             onChange={handleChange}
             id="password"
-            placeholder="Enter your password...."
+            placeholder="Mật khẩu...."
             className={`${
               errors.password && touched.password && "border-red-500"
             } w-full text-black dark:text-white bg-transparent border rounded-lg mt-4 px-2 py-3 font-Popins`}
@@ -142,7 +142,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
         )}
         <div className="w-full mt-5 relative">
           <label className={`${styles.label}`} htmlFor="confirm">
-            Enter your confirm password
+            Xác nhận mật khẩu
           </label>
           <input
             type={confirm ? "text" : "password"}
@@ -150,7 +150,7 @@ const SignUp: FC<Props> = ({ setRoute }) => {
             value={values.confirm}
             onChange={handleChange}
             id="password"
-            placeholder="Enter your password...."
+            placeholder="Xác nhận mật khẩu...."
             className={`${
               errors.password && touched.password && "border-red-500"
             } w-full text-black dark:text-white bg-transparent border rounded-lg mt-4 px-2 py-3 font-Popins`}
@@ -173,10 +173,10 @@ const SignUp: FC<Props> = ({ setRoute }) => {
           <span className="text-red-500 pt-2 block">{errors.confirm}</span>
         )}
         <div className="mb-6">
-          <input type="submit" value="Sign up" className={`${styles.button}`} />
+          <input type="submit" value="Đăng ký" className={`${styles.button}`} />
         </div>
         <div className="text-center font-Popins text-[20px] text-black dark:text-white">
-          Or
+          Hoặc
         </div>
         <div className="flex items-center justify-center my-3 p-2">
           <AiOutlineGoogle
@@ -193,12 +193,12 @@ const SignUp: FC<Props> = ({ setRoute }) => {
           />
         </div>
         <h5 className="text-center text-black dark:text-white pt-4 font-Popins text-[15px]">
-          Already have account ?{" "}
+          Đã có tài khoản ?{" "}
           <span
             onClick={() => setRoute("Login")}
             className="text-[#4548e2] cursor-pointer ml-4"
           >
-            Login
+            Đăng nhập
           </span>
         </h5>
       </form>

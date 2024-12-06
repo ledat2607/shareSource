@@ -15,23 +15,15 @@ const Footer = (props: Props) => {
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
               <div className="space-y-3">
                 <h3 className="text-[25px] font-[700] font-Popins text-black dark:text-white">
-                  About
+                  Liên quan
                 </h3>
                 <ul className="space-y-3">
                   <li>
                     <Link
                       className="text-black dark:text-white font-Josefin text-[20px] font-[600]"
-                      href={"/about"}
-                    >
-                      Our Story
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="text-black dark:text-white font-Josefin text-[20px] font-[600]"
                       href={"/privacy-policy"}
                     >
-                      Privacy Policy
+                      Chính sách
                     </Link>
                   </li>
                   <li>
@@ -46,7 +38,7 @@ const Footer = (props: Props) => {
               </div>
               <div className="space-y-3">
                 <h3 className="text-[25px] font-[700] font-Popins text-black dark:text-white">
-                  Quick Links
+                  Truy cập nhanh
                 </h3>
                 <ul className="space-y-3">
                   <li>
@@ -54,7 +46,7 @@ const Footer = (props: Props) => {
                       className="text-black dark:text-white font-Josefin text-[20px] font-[600]"
                       href={"/courses"}
                     >
-                      Our Course
+                      Khóa học
                     </Link>
                   </li>
                   <li>
@@ -69,7 +61,7 @@ const Footer = (props: Props) => {
               </div>
               <div className="space-y-3">
                 <h3 className="text-[25px] font-[700] font-Popins text-black dark:text-white">
-                  Social Link
+                  Mạng xã hội
                 </h3>
                 <ul className="space-y-3">
                   <li>
@@ -92,7 +84,7 @@ const Footer = (props: Props) => {
               </div>
               <div className="space-y-3">
                 <h3 className="text-[25px] font-[700] font-Popins text-black dark:text-white">
-                  Contact Information
+                  Thông tin liên hệ
                 </h3>
                 <ul className="space-y-3">
                   <li>
@@ -100,7 +92,7 @@ const Footer = (props: Props) => {
                       className="text-black dark:text-white font-Josefin text-[20px] font-[600]"
                       href={"/courses"}
                     >
-                      Phone-number: 0123.456.789
+                      Số điện thoại: 0123.456.789
                     </Link>
                   </li>
                   <li>
@@ -116,8 +108,8 @@ const Footer = (props: Props) => {
                       className="text-black dark:text-white font-Josefin text-[20px] font-[600]"
                       href={"/"}
                     >
-                      Address: 05, Tran Van On Street, Phu Hoa, Thu Dau Mot,
-                      Binh Duong
+                      Địa chỉ: 05, Đường Trần Văn Ơn, Phú Hòa, Thủ Dầu Một, Bình
+                      Dương
                     </Link>
                   </li>
                 </ul>

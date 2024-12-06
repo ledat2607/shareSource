@@ -46,28 +46,35 @@ const AllInvoices: React.FC<Props> = ({ isDashboard }) => {
     { field: "id", headerName: "ID", flex: 0.3 },
     {
       field: "userName",
-      headerName: "Name User",
+      headerName: "Tên người dùngs",
       flex: isDashboard ? 0.6 : 0.5,
     },
     ...(isDashboard
       ? []
       : [
-          { field: "userEmail", headerName: "Email User", flex: 1 },
-          { field: "title", headerName: "Course Title", flex: 1 },
+          { field: "userEmail", headerName: "Email", flex: 1 },
+          { field: "title", headerName: "Tiêu đề khóa học", flex: 1 },
         ]),
-    { field: "price", headerName: "Course Price", flex: 0.5 },
+    { field: "price", headerName: "Phí", flex: 0.5 },
     ...(isDashboard
-      ? [{ field: "created_at", headerName: "Created At", flex: 0.5 }]
-      : [{ field: " ", headerName: "Email", flex: 0.2, renderCell:(params:any)=>{
-        return (
-          <a href={`mailto:${params.row.userEmail}`}>
-            <AiOutlineMail
-              className="dark:text-white text-black cursor-pointer"
-              size={25}
-            />
-          </a>
-        );
-      } }]),
+      ? [{ field: "created_at", headerName: "Ngày tạo", flex: 0.5 }]
+      : [
+          {
+            field: " ",
+            headerName: "Email",
+            flex: 0.2,
+            renderCell: (params: any) => {
+              return (
+                <a href={`mailto:${params.row.userEmail}`}>
+                  <AiOutlineMail
+                    className="dark:text-white text-black cursor-pointer"
+                    size={25}
+                  />
+                </a>
+              );
+            },
+          },
+        ]),
   ];
   const rows:any = [];
   orderData && orderData.forEach((item:any)=>{

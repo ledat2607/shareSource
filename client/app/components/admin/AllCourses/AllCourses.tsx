@@ -35,13 +35,13 @@ const AllCourses: React.FC<Props> = () => {
   
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", flex: 0.7 },
-    { field: "title", headerName: "Course Title", flex: 0.7 },
-    { field: "ratings", headerName: "Ratings", flex: 0.5 },
-    { field: "purchased", headerName: "Purchased", flex: 0.5 },
-    { field: "created_at", headerName: "Created at", flex: 0.5 },
+    { field: "title", headerName: "Tiêu đề khóa học", flex: 0.7 },
+    { field: "ratings", headerName: "Đánh giá", flex: 0.5 },
+    { field: "purchased", headerName: "Lượt tham gia", flex: 0.5 },
+    { field: "created_at", headerName: "Ngày tạo", flex: 0.5 },
     {
       field: "delete",
-      headerName: "Delete",
+      headerName: "Xóa",
       flex: 0.3,
       renderCell: (params: any) => (
         <Button>
@@ -58,7 +58,7 @@ const AllCourses: React.FC<Props> = () => {
     },
     {
       field: "edit",
-      headerName: "Edit",
+      headerName: "Chỉnh sửa",
       flex: 0.3,
       renderCell: (params: any) => (
         <Link href={`edit-course/${params.row.id}`}>

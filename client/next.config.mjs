@@ -8,6 +8,7 @@ const nextConfig = {
       "bazaarvietnam.vn",
       "giadinh.mediacdn.vn",
       "lh3.googleusercontent.com",
+      "avatars.githubusercontent.com",
     ],
   },
 };

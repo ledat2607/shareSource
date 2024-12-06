@@ -1,6 +1,7 @@
 import Rating from '@/app/utils/Rating';
 import Image from 'next/image';
 import React from 'react'
+import { faker } from '@faker-js/faker';
 
 type Props = {
   item: any;
@@ -8,16 +9,17 @@ type Props = {
 };
 
 const ReviewCard: React.FC<Props> = ({ item, index }) => {
+  console.log(item);
   return (
     <div className="course-card w-full h-max pb-4 dark:bg-slate-500 dark:bg-opacity-20 backdrop-blur border rounded-lg p-3 shadow-sm dark:shadow-inner relative">
-      <div className="w-full flex">
+      <div className="w-[50] h-[50] flex">
         <Image
-          src={item.avatar}
+          src={faker.image.avatar()}
           alt=""
           width={50}
           height={50}
           objectFit="cover"
-          className="rounded-2xl"
+          className="rounded-full object-cover"
         />
         <div className="800px:flex justify-center w-full hidden">
           <div className="pl-4 flex justify-between w-full">
@@ -29,7 +31,7 @@ const ReviewCard: React.FC<Props> = ({ item, index }) => {
                 {item.profession}
               </h5>
             </div>
-            <Rating rating={5} />
+            <Rating rating={item.ratings} />
           </div>
         </div>
         {/**For mobile */}

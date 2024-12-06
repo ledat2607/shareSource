@@ -108,8 +108,8 @@ const page = (props: Props) => {
                 className={`${styles.label} justify-center min-h-[50vh] flex items-center`}
               >
                 {searchKeyword
-                  ? "No course found matching your search"
-                  : "No course found in this category. Please try another one!"}
+                  ? "Không tìm thấy bất kì kết quả liên quan"
+                  : "Không tìm thấy bất kì kết quả liên quan đối với danh mục đã chọn"}
               </p>
             )}
             <br />

@@ -50,7 +50,7 @@ const DashboardWidgets: React.FC<Props> = ({ open, value }) => {
     <div className="min-h-screen w-full">
       {/*User analytics*/}
       <h1 className="text-black dark:text-[#43cba0] font-[700] text-[50px] pl-8">
-        User Analytics
+        Thống kê người dùng
       </h1>
       <div className="grid grid-cols-[50%,50%]">
         <div className="p-8">
@@ -65,7 +65,7 @@ const DashboardWidgets: React.FC<Props> = ({ open, value }) => {
                   120
                 </h5>
                 <h5 className="py-2 font-Popins dark:text-[#45cba0] text-black text-[20px]">
-                  Sales Obtained
+                  Tăng trưởng
                 </h5>
               </div>
               <div>
@@ -84,7 +84,7 @@ const DashboardWidgets: React.FC<Props> = ({ open, value }) => {
                   450
                 </h1>
                 <h5 className="py-2 font-Popins dark:text-[#45cba0] text-black text-[20px] font-[400]">
-                  New Users
+                  Lượt đăng ký mới
                 </h5>
               </div>
               <div>
@@ -99,7 +99,7 @@ const DashboardWidgets: React.FC<Props> = ({ open, value }) => {
       </div>
       {/*Order analytics*/}
       <h1 className="text-black dark:text-[#43cba0] font-[700] text-[50px] pl-8">
-        Order Analytics
+        Thống kê số lượng đăng ký khóa học
       </h1>
       <div className="grid grid-cols-[50%,50%]">
         <div className="p-8">
@@ -107,7 +107,7 @@ const DashboardWidgets: React.FC<Props> = ({ open, value }) => {
         </div>
         <div className="p-5">
           <h5 className="dark:text-white text-black tet-[20px] font-[400] font-Popins pb-3">
-            Recent Transactions
+            Thanh toán hiện tại
           </h5>
           <AllInvoices isDashboard={true} />
         </div>

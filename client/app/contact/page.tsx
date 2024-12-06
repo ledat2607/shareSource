@@ -10,9 +10,11 @@ type Props = {};
 const ContactPage = (props: Props) => {
   const [route, setRoute] = useState("Login");
   const [open, setOpen] = useState(false);
-  const handleSubmitForm =()=>{
-    toast.success("Send contact information successfull !");
-  }
+
+  const handleSubmitForm = () => {
+    toast.success("Thông tin của bạn đã được gửi thành công!");
+  };
+
   return (
     <>
       <Header
@@ -33,17 +35,18 @@ const ContactPage = (props: Props) => {
               <div className="flex-shrink-0 mb-6 md:mb-0 md:mr-6">
                 <Image
                   src={contactImg}
-                  alt="Contact Us"
+                  alt="Liên Hệ"
                   width={400}
                   height={400}
                   className="rounded-lg shadow-lg"
                 />
               </div>
               <div className="w-full">
-                <h1 className="text-4xl font-bold mb-6">Contact Us</h1>
+                <h1 className="text-4xl font-bold mb-6">Liên Hệ</h1>
                 <p className="text-lg mb-6">
-                  We'd love to hear from you! Please fill out the form below and
-                  we'll get in touch with you as soon as possible.
+                  Chúng tôi rất mong được nghe ý kiến từ bạn! Vui lòng điền thông
+                  tin vào biểu mẫu bên dưới và chúng tôi sẽ liên lạc lại với bạn
+                  trong thời gian sớm nhất.
                 </p>
                 <form action="#" method="POST" className="space-y-4">
                   <div>
@@ -51,14 +54,14 @@ const ContactPage = (props: Props) => {
                       htmlFor="name"
                       className="block text-lg font-semibold mb-2"
                     >
-                      Name
+                      Họ và Tên
                     </label>
                     <input
                       type="text"
                       id="name"
                       name="name"
                       className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                      placeholder="Your Name"
+                      placeholder="Nhập họ và tên của bạn"
                     />
                   </div>
                   <div>
@@ -73,7 +76,7 @@ const ContactPage = (props: Props) => {
                       id="email"
                       name="email"
                       className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                      placeholder="Your Email"
+                      placeholder="Nhập email của bạn"
                     />
                   </div>
                   <div>
@@ -81,14 +84,14 @@ const ContactPage = (props: Props) => {
                       htmlFor="message"
                       className="block text-lg font-semibold mb-2"
                     >
-                      Message
+                      Tin Nhắn
                     </label>
                     <textarea
                       id="message"
                       name="message"
                       rows={5}
                       className="w-full p-3 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                      placeholder="Your Message"
+                      placeholder="Nhập nội dung tin nhắn"
                     ></textarea>
                   </div>
                   <button
@@ -96,7 +99,7 @@ const ContactPage = (props: Props) => {
                     type="submit"
                     className="w-full py-3 px-6 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 dark:bg-indigo-400 dark:hover:bg-indigo-500"
                   >
-                    Send Message
+                    Gửi Tin Nhắn
                   </button>
                 </form>
               </div>

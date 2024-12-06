@@ -51,16 +51,16 @@ const CourseDetail: React.FC<Props> = ({
             <div className="flex items-center">
               <Rating rating={data.rating} />
               <h5 className="text-black dark:text-white">
-                {data?.reviews.length} Reviews
+                {data?.reviews.length} Đánh giá
               </h5>
             </div>
             <h5 className="text-black dark:text-white">
-              {data.purchased} Students
+              {data.purchased} Học viên
             </h5>
           </div>
           <br />
           <h1 className="text-[25px] font-Popins font-[600] text-black dark:text-white">
-            What will you learn from this course ?
+            Bạn sẽ học gì từ khóa học ?
           </h1>
           <div>
             {data?.benefit?.map((i: any, index: number) => (
@@ -77,7 +77,7 @@ const CourseDetail: React.FC<Props> = ({
           </div>
           <br />
           <h1 className="text-[25px] font-Popins font-[600] text-black dark:text-white">
-            What are the prerequisites for starting this course ?
+            Bạn cần phải chuẩn bị gì để tiếp thu kiến thức của khóa học ?
           </h1>
           <div>
             {data?.prerequisites?.map((i: any, index: number) => (
@@ -94,14 +94,14 @@ const CourseDetail: React.FC<Props> = ({
           </div>
           <br />
           <h1 className="text-[25px] font-Popins font-[600] text-black dark:text-white">
-            Course Overview
+            Xem nhanh
           </h1>
           <CourseContentList data={data.courseData} />
           <br />
           <br />
           <div className="w-full">
             <h1 className="text-[25px] font-Popins font-[600] text-black dark:text-white">
-              Course Details
+              Chi tiết khóa học
             </h1>
             <p className="text-[18px] mt-[20px] whitespace-pre-line overflow-hidden text-black dark:text-white">
               {data.description}
@@ -117,7 +117,7 @@ const CourseDetail: React.FC<Props> = ({
                   {Number.isInteger(data?.rating)
                     ? data.rating.toFixed(1)
                     : data.rating.toFixed(2)}{" "}
-                  Couse Rating - {data.reviews.length} Reviews
+                  Lượt đánh giá - {data.reviews.length} lượt
                 </h5>
               </div>
             </div>
@@ -168,7 +168,7 @@ const CourseDetail: React.FC<Props> = ({
                 {data?.estimatePrice ? data.estimatePrice : ""}
               </h5>
               <h5 className="ml-3 text-[18px] text-black dark:text-[crimson]">
-                Sale {discountPercentPrice} % Off
+                Giảm {discountPercentPrice} %
               </h5>
             </div>
             <div className="flex mt-4 items-center">
@@ -177,30 +177,31 @@ const CourseDetail: React.FC<Props> = ({
                   className="w-[200px] flex items-center justify-center hover:dark:bg-white hover:bg-gray-200 hover:text-[crimson] py-3 px-3 rounded-2xl text-white text-[16px] font-Popins cursor-pointer bg-[crimson] hover:translate-x-3 transition-all duration-300"
                   href={`/course-access/${data._id}`}
                 >
-                  Enter this course
+                  Truy cập khóa học
                 </Link>
               ) : (
                 <div
                   onClick={handleOrder}
-                  className="w-[150px] flex items-center justify-center hover:dark:bg-white hover:bg-gray-200 hover:text-[crimson] py-3 px-3 rounded-2xl text-white text-[16px] font-Popins cursor-pointer bg-[crimson] hover:translate-x-3 transition-all duration-300"
+                  className="w-[250px] flex items-center justify-center hover:dark:bg-white hover:bg-gray-200 hover:text-[crimson] py-3 px-3 rounded-2xl text-white text-[16px] font-Popins cursor-pointer bg-[crimson] hover:translate-x-3 transition-all duration-300"
                 >
-                  Buy {data.price} $ now
+                  Thanh toán {data.price} $ ngay
                 </div>
               )}
             </div>
             <br />
             <p className="pb-1 text-black dark:text-white flex items-center">
-              <IoCheckmarkDoneOutline className="mr-4" /> Source code include
+              <IoCheckmarkDoneOutline className="mr-4" /> Đã bao gồm mã nguồn
             </p>
             <p className="pb-1 text-black dark:text-white flex items-center">
-              <IoCheckmarkDoneOutline className="mr-4" /> Full lifeline access
+              <IoCheckmarkDoneOutline className="mr-4" /> Truy cập không giới
+              hạn
             </p>
             <p className="pb-1 text-black dark:text-white flex items-center">
-              <IoCheckmarkDoneOutline className="mr-4" /> Premium Support
+              <IoCheckmarkDoneOutline className="mr-4" /> Hỗ trợ 24/24
             </p>
             <p className="pb-1 text-black dark:text-white flex items-center">
-              <IoCheckmarkDoneOutline className="mr-4" /> Certificate of
-              completion
+              <IoCheckmarkDoneOutline className="mr-4" /> Cung cấp chứng nhận
+              hoàn thành
             </p>
           </div>
         </div>
